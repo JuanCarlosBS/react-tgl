@@ -1,15 +1,12 @@
-import React from 'react';
-
-import { Body } from './styles'
+import React, { Fragment } from 'react';
 
 import NewBet from './pages/NewBet';
-import Header from './components/Header'
 
 function App() {
   return (
-    <Body>
+    <Fragment>
       <NewBet />
-    </Body>
+    </Fragment>
   );
 }
 
