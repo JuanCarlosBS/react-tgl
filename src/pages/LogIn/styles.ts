@@ -51,3 +51,28 @@ export const TitleText = styles.label`
     color: var(--text-color);
     font-size: 35px;
 `
+
+export const FormAuthentication = styles.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
+export const Form = styles.form`
+    height : 337px;
+    width: 352px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 14px;
+    margin-top: 25px;
+`
+
+export const InputEmail = styles.input`
+    padding: 30px;
+    padding-top: 34px;
+    border-radius: 14px 14px 0px 0px;
+    width: 292px;
+    height: 21px;
+`

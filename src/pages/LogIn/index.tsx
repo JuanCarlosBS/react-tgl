@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{ Fragment } from 'react';
 
-import { Container, Logo, ForLogo, LogoFirstText, LogoForText, LogoSecondText, TitleText } from './styles'
+import { Container, Logo, ForLogo, LogoFirstText, LogoForText, LogoSecondText, TitleText, FormAuthentication, Form, InputEmail } from './styles'
 
 const LogIn = () => {
     return (
@@ -12,10 +12,16 @@ const LogIn = () => {
                 <ForLogo>
                     <LogoForText>for</LogoForText>
                 </ForLogo>
-                <div>
+                <Fragment>
                     <LogoSecondText>LOTTERY</LogoSecondText>
-                </div>
+                </Fragment>
             </Logo>
+            <FormAuthentication>
+                <TitleText>Authentication</TitleText>
+                <Form>
+                    <InputEmail/>
+                </Form>
+            </FormAuthentication>
         </Container>
     )
 }
