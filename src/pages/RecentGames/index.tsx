@@ -13,9 +13,6 @@ const RecentGames = () => {
                     <TitlePageBold>RECENT GAMES</TitlePageBold>
                         <Filters>
                             <LabelFilter>Filters</LabelFilter>
-                            <CheckBox>Lotofácil</CheckBox>
-                            <CheckBox>Mega-sena</CheckBox>
-                            <CheckBox>Lotomania</CheckBox>
                         </Filters>
                     </RecentGamesFilter>
                     <NewBetLink> New Bet ❯</NewBetLink>
