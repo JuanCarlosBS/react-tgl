@@ -43,6 +43,7 @@ export const DescriptionGame = styles.p`
     font-size: 17px;
     color: var(--text-color);
 `
+
 export const Filters = styles.div`
     display: flex;
     justify-content:flex-start;

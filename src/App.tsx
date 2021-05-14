@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 
 import NewBet from './pages/NewBet';
+import RecentGames from './pages/RecentGames';
 
 function App() {
   return (
     <Fragment>
-      <NewBet />
+      <RecentGames />
     </Fragment>
   );
 }

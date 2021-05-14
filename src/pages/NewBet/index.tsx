@@ -36,7 +36,7 @@ const NewBet : React.FC = () => {
                         <Items>
                         </Items>
                         <div>
-                            <TitlePage><TitlePageBold>CART</TitlePageBold> TOTAL:</TitlePage>
+                            <TitlePageBold>CART</TitlePageBold><TitlePage> TOTAL:</TitlePage>
                         </div>
                     </GameCart>
                     <ButtonSave>Save ❯</ButtonSave>
