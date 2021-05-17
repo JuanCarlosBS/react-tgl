@@ -17,8 +17,11 @@ body {
 
 
 body,
-input,
 button,
 textarea {
     font: 900 1.6rem Roboto;
+}
+
+input {
+    font: 500 1.3rem Roboto;
 }

@@ -1,4 +1,5 @@
-import styles from 'styled-components'
+import styles, { css } from 'styled-components'
+
 
 export const Container = styles.div`
     height: 100%;
@@ -67,6 +68,7 @@ export const Form = styles.form`
     background-color: #fff;
     border-radius: 14px;
     margin-top: 25px;
+    border: 1px solid #dddddd;
 `
 
 export const InputEmail = styles.input`
@@ -75,4 +77,43 @@ export const InputEmail = styles.input`
     border-radius: 14px 14px 0px 0px;
     width: 292px;
     height: 21px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #f7f7f7
+
+`
+
+export const LastInput = styles(InputEmail)`
+    border-radius: 0px 0px 0px 0px;
+`
+export const Link = styles.a`    
+    color: #9e9e9e;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 300;
+`
+
+export const SectionForgotPassword = styles.div`
+    margin-top: 30px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content:flex-end; 
+`
+
+export const SubmitButton = styles.button`
+    font-weight: 800;
+    color: #B5C401;
+    text-decoration: none;
+    font-size: 35px;
+    background-color: #fff;
+    border: none;
+`
+
+export const LinkSingUpButton = styles.a`
+    margin-top: 30px; 
+    font-weight: 800;
+    color: #707070;
+    text-decoration: none;
+    font-size: 35px;
+    border: none;
 `
