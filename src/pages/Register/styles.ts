@@ -25,7 +25,7 @@ export const FormAuthentication = styles.div`
     flex-direction: column;
 `
 export const Form = styles.form`
-    height : 337px;
+    height : 385px;
     width: 352px;
     display: flex;
     align-items: center;
@@ -51,27 +51,14 @@ export const Input = styles.input`
 export const LastInput = styles(Input)`
     border-radius: 0px 0px 0px 0px;
 `
-export const Link = styles.a`    
-    color: #9e9e9e;
-    text-decoration: none;
-    font-size: 17px;
-    font-weight: 300;
-`
-
-export const SectionForgotPassword = styles.div`
-    margin-top: 30px;
-    margin-bottom: 35px;
-    width: 298px;
-    display: flex;
-    justify-content:flex-end; 
-`
 
 export const SubmitButton = styles.button`
+    margin-top: 39px;
     font-weight: 800;
     color: #B5C401;
     text-decoration: none;
     font-size: 35px;
-    background-color: #fff;
+    background-color: transparent;
     border: none;
 `
 
