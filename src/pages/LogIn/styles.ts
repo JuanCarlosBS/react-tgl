@@ -96,6 +96,7 @@ export const Link = styles.a`
 export const SectionForgotPassword = styles.div`
     margin-top: 30px;
     margin-bottom: 35px;
+    width: 298px;
     display: flex;
     justify-content:flex-end; 
 `
