@@ -1,7 +1,4 @@
 import styles, { css } from 'styled-components'
-interface CheckBoxProps {
-    onlyTopBorderRadius: boolean;
-}
 
 export const Container = styles.div`
     margin-top: 15px;
@@ -51,12 +48,6 @@ export const Filters = styles.div`
     margin-top: 20px;
 ` 
 
-export const CheckBox = styles.div<CheckBoxProps>`
-    ${props => props.onlyTopBorderRadius && css`
-        display: flex;
-    `
-    }
-`
 
 export const Numbers = styles.div`
     margin-top: 25px;
@@ -98,6 +89,7 @@ export const GamesButton = styles.button`
     padding-left: 24px;
     padding-right:24px;
     cursor: pointer;
+    margin-right: 25px;
 `
 
 export const SubmitButton = styles.button`

@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../components/Header'
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, Item, Image, Bar, ItemContent, GameNamePrice, GameNamePriceText, GameNamePrimeTextBold, ButtonSave } from './styles'
+import CheckFilter from '../../components/CheckFilter'
 
 const NewBet : React.FC = () => {
     return (
