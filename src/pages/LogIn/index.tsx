@@ -1,7 +1,7 @@
 import React,{ Fragment } from 'react';
 
 import Logo from '../../components/Logo'
-import { Container, TitleText, FormAuthentication, Form, Input, Link, SectionForgotPassword, SubmitButton, LinkSingUpButton, LastInput } from './styles'
+import { Container, TitleText, FormAuthentication, Form, Input, LinkForgotPassword, SectionForgotPassword, SubmitButton, LinkSingUpButton, LastInput } from './styles'
 
 const LogIn = () => {
     return (
@@ -13,11 +13,11 @@ const LogIn = () => {
                     <Input placeholder="Email" />
                     <LastInput placeholder="Password" />
                     <SectionForgotPassword>
-                        <Link>I forgot my password</Link>
+                        <LinkForgotPassword to='/forgot-password'>I forgot my password</LinkForgotPassword>
                     </SectionForgotPassword>
-                    <SubmitButton>Log In</SubmitButton>
+                    <SubmitButton to='/recent-games'>Log In</SubmitButton>
                 </Form>
-                <LinkSingUpButton>Sign Up</LinkSingUpButton>
+                <LinkSingUpButton to='/register'>Sign Up</LinkSingUpButton>
             </FormAuthentication>
         </Container>
     )

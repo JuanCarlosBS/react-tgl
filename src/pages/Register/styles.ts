@@ -1,4 +1,5 @@
 import styles, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styles.div`
     height: 100%;
@@ -62,7 +63,7 @@ export const SubmitButton = styles.button`
     border: none;
 `
 
-export const LinkSingUpButton = styles.a`
+export const LinkSingUpButton = styles(Link)`
     margin-top: 30px; 
     font-weight: 800;
     color: #707070;

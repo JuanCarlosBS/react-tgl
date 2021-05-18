@@ -15,7 +15,7 @@ const RecentGames = () => {
                             <LabelFilter>Filters</LabelFilter>
                         </Filters>
                     </RecentGamesFilter>
-                    <NewBetLink> New Bet ❯</NewBetLink>
+                    <NewBetLink to='/new-bet'> New Bet ❯</NewBetLink>
                 </RecentGamesHeader>
             </div>
         </Container>

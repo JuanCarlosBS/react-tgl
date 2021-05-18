@@ -1,4 +1,5 @@
 import styles from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styles.div`
     margin-top: 15px;
@@ -61,7 +62,7 @@ export const LabelFilter = styles.label`
     margin-left: 40px;
 `
 
-export const NewBetLink = styles.a`
+export const NewBetLink = styles(Link)`
     font-size: 24px;
     font-weight:  900;
     color: var(--main-color);

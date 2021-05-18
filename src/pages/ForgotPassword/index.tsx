@@ -13,7 +13,7 @@ const Register = () => {
                     <Input placeholder="Email" />
                     <SubmitButton>Send link</SubmitButton>
                 </Form>
-                <LinkSingUpButton>Back</LinkSingUpButton>
+                <LinkSingUpButton to="/">Back</LinkSingUpButton>
             </FormAuthentication>
         </Container>
     )

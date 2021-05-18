@@ -15,7 +15,7 @@ const Register = () => {
                     <LastInput placeholder="Password" />
                     <SubmitButton>Register</SubmitButton>
                 </Form>
-                <LinkSingUpButton>Back</LinkSingUpButton>
+                <LinkSingUpButton to="/">Back</LinkSingUpButton>
             </FormAuthentication>
         </Container>
     )

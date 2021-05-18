@@ -1,14 +1,17 @@
 import React, { Fragment } from 'react'
-import { Container, Menu, Logo, Divider, Subline, TextMenu, TextMenuFirst }from './styles'
+import { Container, Menu, Logo, Divider, Subline, TextMenu, TextMenuFirst, LinkMenu } from './styles'
 
 const Header : React.FC = () => {
     return (
         <Fragment>
             <Container>
-                <Logo>TGL</Logo>
+                <Menu>
+                    <TextMenuFirst><Logo>TGL</Logo></ TextMenuFirst>
+                    <LinkMenu to='/recent-games'>Home</LinkMenu>
+                </Menu>
                 <Menu>
                     <TextMenuFirst>Account</ TextMenuFirst>
-                    <TextMenu>Sair</TextMenu>
+                    <LinkMenu to='/'>Sair</LinkMenu>
                 </Menu>
             </Container>
             <div>

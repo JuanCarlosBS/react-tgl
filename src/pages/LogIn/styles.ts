@@ -1,4 +1,5 @@
 import styles, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styles.div`
     height: 100%;
@@ -51,7 +52,7 @@ export const Input = styles.input`
 export const LastInput = styles(Input)`
     border-radius: 0px 0px 0px 0px;
 `
-export const Link = styles.a`    
+export const LinkForgotPassword = styles(Link)`    
     color: #9e9e9e;
     text-decoration: none;
     font-size: 17px;
@@ -66,7 +67,7 @@ export const SectionForgotPassword = styles.div`
     justify-content:flex-end; 
 `
 
-export const SubmitButton = styles.button`
+export const SubmitButton = styles(Link)`
     font-weight: 800;
     color: #B5C401;
     text-decoration: none;
@@ -75,7 +76,7 @@ export const SubmitButton = styles.button`
     border: none;
 `
 
-export const LinkSingUpButton = styles.a`
+export const LinkSingUpButton = styles(Link)`
     margin-top: 30px; 
     font-weight: 800;
     color: #707070;

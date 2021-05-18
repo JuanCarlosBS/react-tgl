@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'
 
 export const Container = styled.header`
     display: flex;
@@ -15,6 +16,7 @@ export const Logo = styled.h1`
 
 export const Menu = styled.div`
     display: flex;
+    align-items: center;
 `
 
 export const TextMenu = styled.h2`
@@ -25,6 +27,17 @@ export const TextMenu = styled.h2`
 `
 
 export const TextMenuFirst = styled(TextMenu)`
+    margin-right: 57px;
+`
+
+export const LinkMenu = styled(Link)`
+    font-size: 20px;
+    color: #707070;
+    cursor: pointer;
+    text-decoration: none;
+`
+
+export const LinkMenuFirst = styled(LinkMenu)`
     margin-right: 57px;
 `
 
