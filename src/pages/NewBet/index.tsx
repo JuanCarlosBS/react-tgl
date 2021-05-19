@@ -3,6 +3,7 @@ import Header from '../../components/Header'
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, Item, Image, Bar, ItemContent, GameNamePrice, GameNamePriceText, GameNamePriceTextBold, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
+import NumberButton from '../../components/NumberButton'
 
 const NewBet : React.FC = () => {
     return (
@@ -21,6 +22,16 @@ const NewBet : React.FC = () => {
                             none of the 20 numbers drawn.</DescriptionGame>
                     </div>
                     <Numbers>
+                        <NumberButton>01</NumberButton>
+                        <NumberButton>02</NumberButton>
+                        <NumberButton>03</NumberButton>
+                        <NumberButton>04</NumberButton>
+                        <NumberButton>05</NumberButton>
+                        <NumberButton>06</NumberButton>
+                        <NumberButton>07</NumberButton>
+                        <NumberButton>08</NumberButton>
+                        <NumberButton>09</NumberButton>
+                        <NumberButton>10</NumberButton>
                     </Numbers>
                     <Submit>
                         <div >

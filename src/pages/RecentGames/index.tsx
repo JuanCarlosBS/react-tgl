@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Header from '../../components/Header'
 
 import { Container, RecentGamesHeader, RecentGamesFilter, TitlePageBold, Filters, LabelFilter,  NewBetLink, Items } from './styles'
@@ -6,8 +6,10 @@ import RecentGame from '../../components/RecentGame'
 
 const RecentGames = () => {
     return (
-        <Container>
+        <Fragment>
             <Header />
+        <Container>
+            
             <div className="content">
                 <RecentGamesHeader>
                     <RecentGamesFilter>
@@ -22,6 +24,8 @@ const RecentGames = () => {
             <Items>
             </Items>
         </Container>
+        </Fragment>
+
     )
 }
 
