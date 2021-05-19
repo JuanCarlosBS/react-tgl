@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header'
 
-import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, Item, Image, Bar, ItemContent, GameNamePrice, GameNamePriceText, GameNamePrimeTextBold, ButtonSave } from './styles'
+import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, Item, Image, Bar, ItemContent, GameNamePrice, GameNamePriceText, GameNamePriceTextBold, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
 
 const NewBet : React.FC = () => {
@@ -33,11 +33,11 @@ const NewBet : React.FC = () => {
                 </Game>
                 <Cart>
                     <GameCart>
-                        <TitlePageBold>CART</TitlePageBold>
+                        <TitlePage>CART</TitlePage>
                         <Items>
                         </Items>
                         <div>
-                            <TitlePageBold>CART</TitlePageBold><TitlePage> TOTAL:</TitlePage>
+                         <TitlePage><b>CART</b> TOTAL:</TitlePage>
                         </div>
                     </GameCart>
                     <ButtonSave>Save ❯</ButtonSave>

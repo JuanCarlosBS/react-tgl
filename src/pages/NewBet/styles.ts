@@ -166,7 +166,7 @@ export const GameNamePriceText = styles.h5`
     margin-right: 14px;
 `
 
-export const GameNamePrimeTextBold = styles.h6`
+export const GameNamePriceTextBold = styles.h6`
     font-weight: 300;
 `
 

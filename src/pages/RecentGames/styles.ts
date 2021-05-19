@@ -68,3 +68,12 @@ export const NewBetLink = styles(Link)`
     color: var(--main-color);
     text-decoration: none;
 `
+
+export const Items = styles.div`
+    margin-top: 37px;
+    margin-bottom: 37px;
+    min-height: 207px;
+    height:800px;
+    max-height: 800px;
+    overflow-y: auto;
+`

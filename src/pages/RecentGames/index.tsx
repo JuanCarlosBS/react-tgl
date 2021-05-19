@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../../components/Header'
 
-import { Container, RecentGamesHeader, RecentGamesFilter, TitlePageBold, Filters, LabelFilter, CheckBox, NewBetLink } from './styles'
+import { Container, RecentGamesHeader, RecentGamesFilter, TitlePageBold, Filters, LabelFilter,  NewBetLink, Items } from './styles'
+import RecentGame from '../../components/RecentGame'
 
 const RecentGames = () => {
     return (
@@ -18,6 +19,14 @@ const RecentGames = () => {
                     <NewBetLink to='/new-bet'> New Bet ❯</NewBetLink>
                 </RecentGamesHeader>
             </div>
+            <Items>
+                <RecentGame />
+                <RecentGame />
+                <RecentGame />
+                <RecentGame />
+                <RecentGame />
+                <RecentGame />
+            </Items>
         </Container>
     )
 }

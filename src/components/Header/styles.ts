@@ -41,11 +41,11 @@ export const LinkMenuFirst = styled(LinkMenu)`
     margin-right: 57px;
 `
 
-export const Divider = styled.hr`
-    margin-left: -130px;
+export const Divider = styled.hr` 
+    margin-left: -6%;
     display: flex;
     justify-content: center;
-    width: 150%;
+    width: 111.7%;
     border: 1px solid #EBEBEB;
 `
 
