@@ -20,12 +20,6 @@ const RecentGames = () => {
                 </RecentGamesHeader>
             </div>
             <Items>
-                <RecentGame />
-                <RecentGame />
-                <RecentGame />
-                <RecentGame />
-                <RecentGame />
-                <RecentGame />
             </Items>
         </Container>
     )

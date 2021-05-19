@@ -73,7 +73,7 @@ export const Items = styles.div`
     margin-top: 37px;
     margin-bottom: 37px;
     min-height: 207px;
-    height:800px;
+    height:755px;
     max-height: 800px;
     overflow-y: auto;
 `

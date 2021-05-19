@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Header from '../../components/Header'
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, Item, Image, Bar, ItemContent, GameNamePrice, GameNamePriceText, GameNamePriceTextBold, ButtonSave } from './styles'
@@ -6,8 +6,9 @@ import CheckFilter from '../../components/CheckFilter'
 
 const NewBet : React.FC = () => {
     return (
-        <Container>
+        <Fragment>
             <Header />
+        <Container>
             <Content>
                 <Game>
                     <TitlePage><TitlePageBold>NEW BET</TitlePageBold> FOR MEGA-SENA </TitlePage>
@@ -44,6 +45,7 @@ const NewBet : React.FC = () => {
                 </Cart>
             </Content>
         </Container>
+        </Fragment>
     )  
 }
 
