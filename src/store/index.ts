@@ -1,8 +1,8 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit'
 
 import rootReducer from './modules/rootReducer'
 
-const store = createStore(rootReducer);
+const store = configureStore({reducer:{ cart: rootReducer}});
 
 export default store
