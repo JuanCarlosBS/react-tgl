@@ -55,7 +55,7 @@ const NewBet = () => {
                         <TitleGame>Choose a game</TitleGame>
                         <Filters>
                             {DUMMY_GAMES.map((product) =>(
-                                <CheckFilter onClick={handleGame}>{product.type}</CheckFilter>
+                                <CheckFilter onClick={handleGame} color={product.color}>{product.type}</CheckFilter>
                             ))}
                         </Filters>
                         <div>
