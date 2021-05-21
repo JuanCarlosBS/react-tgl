@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux'
 
 import NewBet from './pages/NewBet';
 import RecentGames from './pages/RecentGames';

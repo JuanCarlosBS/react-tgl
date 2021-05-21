@@ -1,7 +1,7 @@
-import React,{ Fragment } from 'react';
+import React from 'react';
 
 import Logo from '../../components/Logo'
-import { Container, TitleText, FormAuthentication, Form, Input, SubmitButton, LinkSingUpButton, LastInput } from './styles'
+import { Container, TitleText, FormAuthentication, Form, Input, SubmitButton, LinkSingUpButton } from './styles'
 
 const Register = () => {
     return (

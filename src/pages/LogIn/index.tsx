@@ -1,4 +1,4 @@
-import React,{ Fragment } from 'react';
+import React from 'react';
 
 import Logo from '../../components/Logo'
 import { Container, TitleText, FormAuthentication, Form, Input, LinkForgotPassword, SectionForgotPassword, SubmitButton, LinkSingUpButton, LastInput } from './styles'

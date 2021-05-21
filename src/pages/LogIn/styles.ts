@@ -1,4 +1,4 @@
-import styles, { css } from 'styled-components'
+import styles from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styles.div`

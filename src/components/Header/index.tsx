@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Container, Menu, Logo, Divider, Subline, TextMenu, TextMenuFirst, LinkMenu } from './styles'
+import { Container, Menu, Logo, Divider, Subline, TextMenuFirst, LinkMenu } from './styles'
 
 const Header : React.FC = () => {
     return (

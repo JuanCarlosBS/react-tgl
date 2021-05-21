@@ -2,9 +2,9 @@ import React from 'react';
 
 import {CheckBox} from './styles'
 
-const CheckFilter: React.FC = (props) => {
+const CheckFilter: React.FC<{ onClick: () => void }> = (props) => {
     return (
-            <CheckBox>{props.children}</CheckBox>
+            <CheckBox onClick={props.onClick}>{props.children}</CheckBox>
     )
 }
 
