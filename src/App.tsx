@@ -8,11 +8,8 @@ import LogIn from './pages/LogIn';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword'
 
-import store from './store';
-
 function App() {
   return (
-    <Provider store={store}>
       <Fragment>
         <Switch>
           <Route path="/" exact>
@@ -35,7 +32,6 @@ function App() {
           </Route>
         </Switch>
       </Fragment>
-    </Provider>
   );
 }
 
