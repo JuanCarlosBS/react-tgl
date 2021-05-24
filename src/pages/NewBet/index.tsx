@@ -60,19 +60,24 @@ const NewBet = () => {
             <Container>
                 <Content>
                     <Game>
-                        <TitlePage><TitlePageBold>NEW BET </TitlePageBold> FOR {game == 4 ? <div></div> :DUMMY_GAMES[game].type.toUpperCase()} </TitlePage>
+                        <TitlePage><TitlePageBold>NEW BET </TitlePageBold> FOR {game === 4 ? <div></div> :DUMMY_GAMES[game].type.toUpperCase()} </TitlePage>
                         <TitleGame>Choose a game</TitleGame>
                         <Filters>
-                            {DUMMY_GAMES.map((product, index) =>(
-                                <CheckFilter selectFilter={handleGame} value={index} color={product.color}>{product.type}</CheckFilter>
-                            ))}
+                            {DUMMY_GAMES.map((product, index) =>{ 
+                                if (index === game) {
+                                return <CheckFilter selectFilter={handleGame} value={index} firstColor={product.color} secondColor={'#fff'}>{product.type}</CheckFilter>
+                                } else {
+                                    return <CheckFilter selectFilter={handleGame} value={index} firstColor={'#fff'} secondColor={product.color}>{product.type}</CheckFilter>
+                                }
+                            }
+                            )}
                         </Filters>
                         <div>
                             <TitleGame>Fill your bet</TitleGame>
-                            <DescriptionGame>{game == 4 ? <div></div> :DUMMY_GAMES[game].description}</DescriptionGame>
+                            <DescriptionGame>{game === 4 ? <div></div> :DUMMY_GAMES[game].description}</DescriptionGame>
                         </div>
                         <Numbers>
-                            {game == 4 ? <div></div> : arrayGamesRange.map(item =>(
+                            {game === 4 ? <div></div> : arrayGamesRange.map(item =>(
                                 <NumberButton>{item>9? item: `0${item}`}</NumberButton>
                             ))}
                         </Numbers>

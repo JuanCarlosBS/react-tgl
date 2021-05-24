@@ -2,10 +2,10 @@ import React from 'react';
 
 import {CheckBox} from './styles'
 
-const CheckFilter: React.FC<{ selectFilter: (gameValue: number) => void, color: string, value: number}> = (props) => {
+const CheckFilter: React.FC<{ selectFilter: (gameValue: number) => void, firstColor: string, secondColor: string, value: number}> = (props) => {
     
     return (
-            <CheckBox onClick={() => {props.selectFilter(props.value)}} style={{color: props.color, border: `2px solid ${props.color}`}}>{props.children}</CheckBox>
+            <CheckBox onClick={() => {props.selectFilter(props.value)}} style={{color: props.secondColor, border: `2px solid ${props.firstColor === '#fff' ? props.secondColor : props.firstColor}`, backgroundColor: props.firstColor}}>{props.children}</CheckBox>
     )   
 }
 
