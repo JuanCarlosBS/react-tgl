@@ -19,6 +19,8 @@ export const Game = styles.div`
 `
 
 export const TitlePage = styles.h3`
+    display: flex;
+    margin-right: 6px;
     font-weight: 300;
     font-size: 24px;
     color: var(--text-color);

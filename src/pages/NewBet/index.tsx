@@ -37,12 +37,21 @@ const DUMMY_GAMES = [
 
 const NewBet = () => {
 
-    const [game, setGame] = useState(0)
+    const [game, setGame] = useState<number>(4)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
     
-    function handleGame() {
-        setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[game].range)}, (_,i) => i+1))
-        console.log(arrayGamesRange)
+    function handleGame(gameValue: number) {
+        selectGame(gameValue)
+        selectNumbers(gameValue)
+    }
+    function selectGame(props: number){
+        setGame(props)
+        console.log(props)
+    }
+
+    function selectNumbers(props: number) {
+        setArrayGamesRange([])
+        setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
 
     return(
@@ -51,19 +60,19 @@ const NewBet = () => {
             <Container>
                 <Content>
                     <Game>
-                        <TitlePage><TitlePageBold>NEW BET</TitlePageBold> FOR MEGA-SENA </TitlePage>
+                        <TitlePage><TitlePageBold>NEW BET </TitlePageBold> FOR {game == 4 ? <div></div> :DUMMY_GAMES[game].type.toUpperCase()} </TitlePage>
                         <TitleGame>Choose a game</TitleGame>
                         <Filters>
-                            {DUMMY_GAMES.map((product) =>(
-                                <CheckFilter onClick={handleGame} color={product.color}>{product.type}</CheckFilter>
+                            {DUMMY_GAMES.map((product, index) =>(
+                                <CheckFilter selectFilter={handleGame} value={index} color={product.color}>{product.type}</CheckFilter>
                             ))}
                         </Filters>
                         <div>
                             <TitleGame>Fill your bet</TitleGame>
-                            <DescriptionGame>{DUMMY_GAMES[game].description}</DescriptionGame>
+                            <DescriptionGame>{game == 4 ? <div></div> :DUMMY_GAMES[game].description}</DescriptionGame>
                         </div>
                         <Numbers>
-                            { arrayGamesRange.map(item =>(
+                            {game == 4 ? <div></div> : arrayGamesRange.map(item =>(
                                 <NumberButton>{item>9? item: `0${item}`}</NumberButton>
                             ))}
                         </Numbers>
