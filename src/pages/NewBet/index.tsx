@@ -55,7 +55,11 @@ const NewBet = () => {
         setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
     function activeNumberHandle(props: number) {
+
         if (numbers.indexOf(props) === -1) {
+            if (numbers.length >= DUMMY_GAMES[game]['max-number']){
+                return
+            }
         setNumbers((prevNumbers) => {
             return [
                 ...prevNumbers, 
