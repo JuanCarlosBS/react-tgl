@@ -47,7 +47,6 @@ const NewBet = () => {
     }
     function selectGame(props: number){
         setGame(props)
-        console.log(props)
     }
 
     function selectNumbers(props: number) {
@@ -70,11 +69,13 @@ const NewBet = () => {
         }
 
     }
-    function arrayRemove(arr: number[], value: number) { 
-    
-        return arr.filter(function(ele){ 
-            return ele != value; 
-        });
+
+    function completeGame() {
+        while (numbers.length < DUMMY_GAMES[game]['max-number']) {
+            const number = Math.floor(Math.random() * DUMMY_GAMES[game].range + 1)
+            console.log(number)
+            activeNumberHandle(number)
+        }
     }
     return(
         <Fragment>
@@ -110,7 +111,7 @@ const NewBet = () => {
                         </Numbers>
                         <Submit>
                             <div >
-                                <GamesButton>Complete game</GamesButton>
+                                <GamesButton onClick={completeGame}>Complete game</GamesButton>
                                 <GamesButton>Clear game</GamesButton>
                             </div>
                             <div>
