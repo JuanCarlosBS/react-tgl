@@ -54,16 +54,24 @@ const NewBet = () => {
         setArrayGamesRange([])
         setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
-
     function activeNumberHandle(props: number) {
+        if (numbers.indexOf(props) === -1) {
         setNumbers((prevNumbers) => {
             return [
                 ...prevNumbers, 
                 props
             ]
-        })
-    }
+        })} else {
+            setNumbers(numbers.filter(item => item !== props))
+        }
 
+    }
+    function arrayRemove(arr: number[], value: number) { 
+    
+        return arr.filter(function(ele){ 
+            return ele != value; 
+        });
+    }
     return(
         <Fragment>
             <Header />
