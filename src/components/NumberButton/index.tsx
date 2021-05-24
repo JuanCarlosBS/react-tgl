@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { NumbersButton } from './styles'
-const NumberButton: React.FC = (props) => {
+const NumberButton: React.FC<{ activeNumber: (number: number) => void, value: number, color: string }> = (props) => {
     return (
-        <NumbersButton>{props.children}</NumbersButton>
+        <NumbersButton onClick={() => {props.activeNumber(props.value)}} style={{ backgroundColor: props.color, border: `1px solid ${props.color}`}}>{props.children}</NumbersButton>
     )
 }
 

@@ -39,6 +39,7 @@ const NewBet = () => {
 
     const [game, setGame] = useState<number>(4)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
+    const [numbers, setNumbers] = useState<number[]>([])
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -54,6 +55,15 @@ const NewBet = () => {
         setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
 
+    function activeNumberHandle(props: number) {
+        setNumbers((prevNumbers) => {
+            return [
+                ...prevNumbers, 
+                props
+            ]
+        })
+    }
+
     return(
         <Fragment>
             <Header />
@@ -65,7 +75,7 @@ const NewBet = () => {
                         <Filters>
                             {DUMMY_GAMES.map((product, index) =>{ 
                                 if (index === game) {
-                                return <CheckFilter selectFilter={handleGame} value={index} firstColor={product.color} secondColor={'#fff'}>{product.type}</CheckFilter>
+                                    return <CheckFilter selectFilter={handleGame} value={index} firstColor={product.color} secondColor={'#fff'}>{product.type}</CheckFilter>
                                 } else {
                                     return <CheckFilter selectFilter={handleGame} value={index} firstColor={'#fff'} secondColor={product.color}>{product.type}</CheckFilter>
                                 }
@@ -77,9 +87,14 @@ const NewBet = () => {
                             <DescriptionGame>{game === 4 ? <div></div> :DUMMY_GAMES[game].description}</DescriptionGame>
                         </div>
                         <Numbers>
-                            {game === 4 ? <div></div> : arrayGamesRange.map(item =>(
-                                <NumberButton>{item>9? item: `0${item}`}</NumberButton>
-                            ))}
+                            {game === 4 ? <div></div> : arrayGamesRange.map((item) =>{
+                                    const numberItem = numbers.find(element => element === item)
+                                    if (numberItem === item){
+                                        return (<NumberButton activeNumber={activeNumberHandle} value={item} color={'#01AC66'}>{item>9? item: `0${item}`} </NumberButton>)
+                                    } else {
+                                        return(<NumberButton activeNumber={activeNumberHandle} value={item} color={'#ADC0C4'}>{item>9? item: `0${item}`} </NumberButton>)
+                                    }
+                            })}
                         </Numbers>
                         <Submit>
                             <div >
