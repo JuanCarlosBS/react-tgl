@@ -4,6 +4,8 @@ import Header from '../../components/Header'
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
 import NumberButton from '../../components/NumberButton'
+import ItemCart from '../../components/ItemCart'
+import { clear } from 'console'
 
 const DUMMY_GAMES = [
     {
@@ -40,10 +42,12 @@ const NewBet = () => {
     const [game, setGame] = useState<number>(4)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
     const [numbers, setNumbers] = useState<number[]>([])
+    const [cart, setCart] = useState<object[]>([])
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
         selectNumbers(gameValue)
+        clearGame()
     }
     function selectGame(props: number){
         setGame(props)
@@ -54,7 +58,6 @@ const NewBet = () => {
         setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
     function activeNumberHandle(props: number) {
-
         if (numbers.indexOf(props) === -1) {
             if (numbers.length >= DUMMY_GAMES[game]['max-number']){
                 return
@@ -71,10 +74,27 @@ const NewBet = () => {
     }
 
     function completeGame() {
-        while (numbers.length < DUMMY_GAMES[game]['max-number']) {
-            const number = Math.floor(Math.random() * DUMMY_GAMES[game].range + 1)
-            console.log(number)
-            activeNumberHandle(number)
+        while (numbers.length >= DUMMY_GAMES[game]['max-number']) {
+            const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range + 1)
+            console.log(numbersGame)
+            activeNumberHandle(numbersGame)
+        }
+    }
+
+    function clearGame() {
+        setNumbers([])
+    }
+
+    function addCartHandle() {
+        if (numbers.length === DUMMY_GAMES[game]['max-number']) {
+            setCart((prevCart) => {
+                return [
+                    ...prevCart, 
+                    { type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, numbers: numbers}
+                ]
+            })
+            clearGame()
+            console.log(cart)
         }
     }
     return(
@@ -112,10 +132,10 @@ const NewBet = () => {
                         <Submit>
                             <div >
                                 <GamesButton onClick={completeGame}>Complete game</GamesButton>
-                                <GamesButton>Clear game</GamesButton>
+                                <GamesButton onClick={clearGame}>Clear game</GamesButton>
                             </div>
                             <div>
-                                <SubmitButton>Add to Cart</SubmitButton>
+                                <SubmitButton onClick={addCartHandle}>Add to Cart</SubmitButton>
                             </div>
                         </Submit>
                     </Game>
@@ -123,6 +143,7 @@ const NewBet = () => {
                         <GameCart>
                             <TitlePage>CART</TitlePage>
                             <Items>
+                                <ItemCart></ItemCart>
                             </Items>
                             <div>
                             <TitlePage><b>CART</b> TOTAL:</TitlePage>
