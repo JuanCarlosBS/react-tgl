@@ -37,12 +37,21 @@ const DUMMY_GAMES = [
     }
 ]
 
+interface ICart {
+    id: string;
+    type: string;
+    price: number;
+    color: string;
+    numbers: number[];
+    enabled: boolean;
+}
+
 const NewBet = () => {
 
     const [game, setGame] = useState<number>(4)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
     const [numbers, setNumbers] = useState<number[]>([])
-    const [cart, setCart] = useState<object[]>([])
+    const [cart, setCart] = useState<ICart[]>([])
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -74,8 +83,8 @@ const NewBet = () => {
     }
 
     function completeGame() {
-        while (numbers.length >= DUMMY_GAMES[game]['max-number']) {
-            const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range + 1)
+        while (numbers.length < DUMMY_GAMES[game]['max-number']) {
+            const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range) + 1
             console.log(numbersGame)
             activeNumberHandle(numbersGame)
         }
@@ -90,7 +99,7 @@ const NewBet = () => {
             setCart((prevCart) => {
                 return [
                     ...prevCart, 
-                    { type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, numbers: numbers}
+                    { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, enabled: true}
                 ]
             })
             clearGame()
@@ -143,7 +152,9 @@ const NewBet = () => {
                         <GameCart>
                             <TitlePage>CART</TitlePage>
                             <Items>
-                                <ItemCart></ItemCart>
+                                {cart.map(item => {
+                                    return <ItemCart id={item.id} color={item.color} cartNumbers={item.numbers} cartGame={item.type} cartPrice={item.price}></ItemCart>
+                                })}
                             </Items>
                             <div>
                             <TitlePage><b>CART</b> TOTAL:</TitlePage>
