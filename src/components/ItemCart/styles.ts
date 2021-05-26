@@ -13,19 +13,21 @@ export const Image = styles.img`
 `
 
 export const Bar = styles.div`
-    min-width: 2px;
+    min-width: 4px;
     height: 60px;
     border-radius: 10px 0px 0px 10px;
     margin-right: 12px;
 `
 
 export const ItemContent = styles.p`
+    font-size: 15px;
     margin-bottom: 6px;
+    color: #868686;
 `
 export const GameNamePrice = styles.div`
     display:flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 16px;
 `
 
 export const GameNamePriceText = styles.h5`
@@ -34,4 +36,9 @@ export const GameNamePriceText = styles.h5`
 
 export const GameNamePriceTextBold = styles.h6`
     font-weight: 300;
+`
+
+export const Content = styles.div`
+    display flex;
+    flex-direction: column;
 `
