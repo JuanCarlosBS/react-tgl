@@ -6,6 +6,14 @@ export const Item = styles.div`
     margin-bottom: 32px;
 `
 
+export const ButtonDelete = styles.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0px solid transparent;
+    background-color: transparent;
+`
+
 export const Image = styles.img`
     height: 24px;
     margin-right: 14px;

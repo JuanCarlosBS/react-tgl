@@ -30,12 +30,15 @@ export const Filters = styles.div`
 
 export const TitlePage = styles.h3`
     font-weight: 300;
-    font-size: 24px;
+    font-size: 17px;
+    margin-right: 45px;
     color: var(--text-color);
 `
 
 export const TitlePageBold = styles(TitlePage)`
     font-weight: 700;
+    
+    font-size: 24px;
 `
 
 export const CheckBox = styles.div`

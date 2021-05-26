@@ -6,6 +6,7 @@ import CheckFilter from '../../components/CheckFilter'
 import NumberButton from '../../components/NumberButton'
 import ItemCart from '../../components/ItemCart'
 import { clear } from 'console'
+import { combineReducers } from 'redux'
 
 const DUMMY_GAMES = [
     {
@@ -48,10 +49,11 @@ interface ICart {
 
 const NewBet = () => {
 
-    const [game, setGame] = useState<number>(4)
+    const [game, setGame] = useState<number>(-1)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
     const [numbers, setNumbers] = useState<number[]>([])
     const [cart, setCart] = useState<ICart[]>([])
+    const [total, setTotal] = useState<number>(0)
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -79,7 +81,6 @@ const NewBet = () => {
         })} else {
             setNumbers(numbers.filter(item => item !== props))
         }
-
     }
 
     function completeGame() {
@@ -103,9 +104,29 @@ const NewBet = () => {
                 ]
             })
             clearGame()
-            console.log(cart)
+            
         }
     }
+
+    function saveCart() {
+        clearGame()
+    }
+
+    function sumCartPrice() {
+        cart.map( item => {
+            if(item.enabled === true) {
+                const totalPrice = item.price + total
+                console.log(totalPrice)
+                setTotal(totalPrice)
+            }
+        })
+    }
+
+    function removeItemCart(id: string) {
+        setCart(cart.filter(item => item.id != id))
+        console.log(cart)
+    }
+
     return(
         <Fragment>
             <Header />
@@ -153,14 +174,14 @@ const NewBet = () => {
                             <TitlePage>CART</TitlePage>
                             <Items>
                                 {cart.map(item => {
-                                    return <ItemCart id={item.id} color={item.color} cartNumbers={item.numbers} cartGame={item.type} cartPrice={item.price}></ItemCart>
+                                    return <ItemCart id={item.id} color={item.color} cartNumbers={item.numbers} cartGame={item.type} cartPrice={item.price} remove={removeItemCart}></ItemCart>
                                 })}
                             </Items>
                             <div>
-                            <TitlePage><b>CART</b> TOTAL:</TitlePage>
+                            <TitlePage><b>CART</b> TOTAL: {total.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</TitlePage>
                             </div>
                         </GameCart>
-                        <ButtonSave>Save ❯</ButtonSave>
+                        <ButtonSave onClick={saveCart}>Save ❯</ButtonSave>
                     </Cart>
                 </Content>
             </Container>
