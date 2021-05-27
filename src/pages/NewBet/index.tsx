@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import Header from '../../components/Header'
+import { connect, useDispatch } from 'react-redux'
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
 import NumberButton from '../../components/NumberButton'
 import ItemCart from '../../components/ItemCart'
-import { clear } from 'console'
-import { combineReducers } from 'redux'
+import { RecentGamesActions } from '../../store/modules/recentGames'
 
 const DUMMY_GAMES = [
     {
@@ -54,6 +54,7 @@ const NewBet = () => {
     const [numbers, setNumbers] = useState<number[]>([])
     const [cart, setCart] = useState<ICart[]>([])
     const [total, setTotal] = useState<number>(0)
+    const dispatch = useDispatch()
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -104,12 +105,16 @@ const NewBet = () => {
                 ]
             })
             clearGame()
-            
         }
     }
 
-    function saveCart() {
+    function saveCart(products: ICart[]) {
+        setNumbers([])
+        cart.forEach((item) => {
+            dispatch(RecentGamesActions.addItemToCart(item))
+        })
         clearGame()
+        setCart([])
     }
 
     function sumCartPrice() {
@@ -133,7 +138,10 @@ const NewBet = () => {
             <Container>
                 <Content>
                     <Game>
-                        <TitlePage><TitlePageBold>NEW BET </TitlePageBold> FOR {game === 4 ? <div></div> :DUMMY_GAMES[game].type.toUpperCase()} </TitlePage>
+                        <TitlePage>
+                            <TitlePageBold>NEW BET </TitlePageBold>
+                            FOR {game === -1 ? <div></div> :DUMMY_GAMES[game].type.toUpperCase()}
+                        </TitlePage>
                         <TitleGame>Choose a game</TitleGame>
                         <Filters>
                             {DUMMY_GAMES.map((product, index) =>{ 
@@ -147,7 +155,7 @@ const NewBet = () => {
                         </Filters>
                         <div>
                             <TitleGame>Fill your bet</TitleGame>
-                            <DescriptionGame>{game === 4 ? <div></div> :DUMMY_GAMES[game].description}</DescriptionGame>
+                            <DescriptionGame>{game == -1 ? <div></div> : DUMMY_GAMES[game].description}</DescriptionGame>
                         </div>
                         <Numbers>
                             {game === 4 ? <div></div> : arrayGamesRange.map((item) =>{
@@ -181,7 +189,7 @@ const NewBet = () => {
                             <TitlePage><b>CART</b> TOTAL: {total.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</TitlePage>
                             </div>
                         </GameCart>
-                        <ButtonSave onClick={saveCart}>Save ❯</ButtonSave>
+                        <ButtonSave onClick={() => {saveCart(cart)}}>Save ❯</ButtonSave>
                     </Cart>
                 </Content>
             </Container>
@@ -189,4 +197,4 @@ const NewBet = () => {
     )
 }
 
-export default NewBet
+export default connect()(NewBet)

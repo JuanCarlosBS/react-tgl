@@ -37,7 +37,6 @@ export const TitlePage = styles.h3`
 
 export const TitlePageBold = styles(TitlePage)`
     font-weight: 700;
-    
     font-size: 24px;
 `
 

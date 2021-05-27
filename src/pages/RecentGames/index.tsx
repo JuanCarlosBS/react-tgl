@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import { Container, RecentGamesHeader, RecentGamesFilter, TitlePage, TitlePageBold, Filters, LabelFilter,  NewBetLink, Items } from './styles'
 import RecentGame from '../../components/RecentGame'
 import CheckFilter from '../../components/CheckFilter'
+import { useSelector } from 'react-redux'
 
 const DUMMY_GAMES = [
     {
@@ -36,6 +37,8 @@ const DUMMY_GAMES = [
 ]
 
 const RecentGames = () => {
+    const { games } = useSelector((state: any ) => state.recentGames)
+
     const [game, setGame] = useState<number>(-1)
 
     function handleGame(gameValue: number) {
