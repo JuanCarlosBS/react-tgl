@@ -1,10 +1,10 @@
 import { createStore, Store } from 'redux'
 
 import rootReducer from './ducks/rootReducer'
-import { RepositoriesState } from './ducks/repositories/types'
+import { saveGamesState } from './ducks/saveGames/types'
 
 export interface ApplicationState {
-    repositories: RepositoriesState
+    saveGames: saveGamesState
 }
 
 const store: Store<ApplicationState> = createStore(rootReducer)

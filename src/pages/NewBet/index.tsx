@@ -7,7 +7,6 @@ import CheckFilter from '../../components/CheckFilter'
 import NumberButton from '../../components/NumberButton'
 import ItemCart from '../../components/ItemCart'
 import { ApplicationState } from '../../store/index'
-import { Repository } from '../../store/ducks/repositories/types'
 
 const DUMMY_GAMES = [
     {
@@ -102,6 +101,7 @@ const NewBet = () => {
         while (numbers.length < DUMMY_GAMES[game]['max-number']) {
             const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range) + 1
             console.log(numbersGame)
+            console.log(numbers.length)
             activeNumberHandle(numbersGame)
         }
     }

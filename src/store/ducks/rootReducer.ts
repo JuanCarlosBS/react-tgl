@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import repositories from './repositories'
+import saveGames from './saveGames'
 
 export default combineReducers({
-    repositories,
+    saveGames,
 })

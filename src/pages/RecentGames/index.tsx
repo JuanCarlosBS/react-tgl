@@ -1,19 +1,24 @@
 import React, { Fragment, useState } from 'react'
 import Header from '../../components/Header'
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 
 import { Container, RecentGamesHeader, RecentGamesFilter, TitlePage, TitlePageBold, Filters, LabelFilter,  NewBetLink, Items } from './styles'
 import RecentGame from '../../components/RecentGame'
 import CheckFilter from '../../components/CheckFilter'
-import { useSelector } from 'react-redux'
+import * as saveGamesActions from '../../store/ducks/saveGames/actions';
+import { ApplicationState } from '../../store';
+import { saveGame } from '../../store/ducks/saveGames/types';
 
-interface ICart {
-    id: string;
-    type: string;
-    price: number;
-    color: string;
-    numbers: number[];
-    enabled: boolean;
-  }
+interface StateProps {
+    saveGames: saveGame[]
+}
+
+interface DispatchProps {
+    loadRequest(): void
+}
+
+type Props = StateProps & DispatchProps
 
 const DUMMY_GAMES = [
     {
@@ -45,9 +50,12 @@ const DUMMY_GAMES = [
     }
 ]
 
-const RecentGames = () => {
-
+function RecentGames(props: Props) {
     const [game, setGame] = useState<number>(-1)
+    const { loadRequest } = props
+    const { saveGames } = props
+
+    loadRequest()
 
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -82,7 +90,9 @@ const RecentGames = () => {
                 </RecentGamesHeader>
             </div>
             <Items>
-                <RecentGame numbers={[1,2,3]} date={'30/05/2021'} price={34} game={'Lotofácil'} color={'#fff'}></RecentGame>
+                {saveGames.map((savedGame) => (
+                    <RecentGame numbers={savedGame.numbers} date={'30/05/2002'} price={savedGame.price} game={savedGame.type} color={savedGame.color}></RecentGame>
+                ))}
             </Items>
         </Container>
         </Fragment>
@@ -90,4 +100,10 @@ const RecentGames = () => {
     )
 }
 
-export default RecentGames
+const mapStateToProps = (state: ApplicationState) => ({
+    saveGames: state.saveGames.data,
+  });
+  
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(saveGamesActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecentGames)
