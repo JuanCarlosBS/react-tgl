@@ -1,11 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { createStore, Store } from 'redux'
 
-import { recentGamesSlice } from './modules/recentGames'
+import rootReducer from './ducks/rootReducer'
+import { RepositoriesState } from './ducks/repositories/types'
 
-const store = configureStore({
-    reducer: { 
-        recent: recentGamesSlice.reducer
-    },
-})
+export interface ApplicationState {
+    repositories: RepositoriesState
+}
+
+const store: Store<ApplicationState> = createStore(rootReducer)
 
 export default store

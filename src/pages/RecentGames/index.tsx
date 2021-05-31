@@ -6,6 +6,15 @@ import RecentGame from '../../components/RecentGame'
 import CheckFilter from '../../components/CheckFilter'
 import { useSelector } from 'react-redux'
 
+interface ICart {
+    id: string;
+    type: string;
+    price: number;
+    color: string;
+    numbers: number[];
+    enabled: boolean;
+  }
+
 const DUMMY_GAMES = [
     {
       "type": "Lotofácil",
@@ -37,7 +46,6 @@ const DUMMY_GAMES = [
 ]
 
 const RecentGames = () => {
-    const { games } = useSelector((state: any ) => state.recentGames)
 
     const [game, setGame] = useState<number>(-1)
 
@@ -74,6 +82,7 @@ const RecentGames = () => {
                 </RecentGamesHeader>
             </div>
             <Items>
+                <RecentGame numbers={[1,2,3]} date={'30/05/2021'} price={34} game={'Lotofácil'} color={'#fff'}></RecentGame>
             </Items>
         </Container>
         </Fragment>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
 export const Container = styled.header`
+    min-width: 425px;
     margin-top: 15px;
     margin-left: 130px;
     margin-right: 130px;

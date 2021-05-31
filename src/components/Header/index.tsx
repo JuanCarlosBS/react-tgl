@@ -7,7 +7,7 @@ const Header : React.FC = () => {
             <Container>
                 <Menu>
                     <TextMenuFirst><Logo>TGL</Logo></ TextMenuFirst>
-                    <LinkMenu to='/recent-games'>Home</LinkMenu>
+                    <LinkMenu to='/recent-games' >Home</LinkMenu>
                 </Menu>
                 <Menu>
                     <TextMenuFirst>Account</ TextMenuFirst>

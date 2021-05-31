@@ -6,7 +6,8 @@ import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters,
 import CheckFilter from '../../components/CheckFilter'
 import NumberButton from '../../components/NumberButton'
 import ItemCart from '../../components/ItemCart'
-import { RecentGamesActions } from '../../store/modules/recentGames'
+import { ApplicationState } from '../../store/index'
+import { Repository } from '../../store/ducks/repositories/types'
 
 const DUMMY_GAMES = [
     {
@@ -38,6 +39,20 @@ const DUMMY_GAMES = [
     }
 ]
 
+interface StateProps{
+
+}
+
+interface DispatchProps {
+
+}
+
+interface OwnProps {
+
+}
+
+type Props = StateProps & DispatchProps & OwnProps
+
 interface ICart {
     id: string;
     type: string;
@@ -48,7 +63,6 @@ interface ICart {
 }
 
 const NewBet = () => {
-
     const [game, setGame] = useState<number>(-1)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
     const [numbers, setNumbers] = useState<number[]>([])
@@ -99,6 +113,7 @@ const NewBet = () => {
     function addCartHandle() {
         if (numbers.length === DUMMY_GAMES[game]['max-number']) {
             setCart((prevCart) => {
+                setTotal(total + DUMMY_GAMES[game].price)
                 return [
                     ...prevCart, 
                     { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, enabled: true}
@@ -109,27 +124,18 @@ const NewBet = () => {
     }
 
     function saveCart(products: ICart[]) {
-        setNumbers([])
-        cart.forEach((item) => {
-            dispatch(RecentGamesActions.addItemToCart(item))
-        })
-        clearGame()
-        setCart([])
-    }
-
-    function sumCartPrice() {
-        cart.map( item => {
-            if(item.enabled === true) {
-                const totalPrice = item.price + total
-                console.log(totalPrice)
-                setTotal(totalPrice)
-            }
-        })
+        if(total >= 30) {
+            
+            setNumbers([])
+            clearGame()
+            setCart([])
+        }
     }
 
     function removeItemCart(id: string) {
         setCart(cart.filter(item => item.id != id))
-        console.log(cart)
+        const cartFilter = cart.filter(item => item.id = id)
+        setTotal(total - cartFilter[0].price)
     }
 
     return(
@@ -196,5 +202,6 @@ const NewBet = () => {
         </Fragment>
     )
 }
+
 
 export default connect()(NewBet)

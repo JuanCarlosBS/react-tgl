@@ -2,18 +2,18 @@ import React from 'react';
 
 import { Item, Bar, Numbers, GameNamePrice, GameNamePriceTextOffBold, GameNamePriceText } from './styles'
 
-const RecentGame: React.FC = () => {
+const RecentGame: React.FC<{ numbers: number[], date: string, price: number, game: string, color: string}> = (props) => {
     return (
         <Item>
-            <Bar/>
+            <Bar style={{ backgroundColor: props.color }}/>
             <div>
-                <Numbers>01, 02,04,05,06,07,09,15,17,20,21,22,23,24,25</Numbers>
+                <Numbers>{props.numbers.join(', ')}</Numbers>
                 <GameNamePrice>
-                    <GameNamePriceTextOffBold>30/11/2021</GameNamePriceTextOffBold>
+                    <GameNamePriceTextOffBold>{props.date}</GameNamePriceTextOffBold>
                     <GameNamePriceTextOffBold> - </GameNamePriceTextOffBold>
-                    <GameNamePriceTextOffBold>(R$ 2,50)</GameNamePriceTextOffBold>
+                    <GameNamePriceTextOffBold>({props.price.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})})</GameNamePriceTextOffBold>
                 </GameNamePrice>
-                <GameNamePriceText>Lotofácil</GameNamePriceText>
+                <GameNamePriceText style={{ color: props.color}}>{props.game}</GameNamePriceText>
             </div>
         </Item>
     );

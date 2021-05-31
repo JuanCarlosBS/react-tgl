@@ -15,4 +15,5 @@ export const CheckBox = styles.div`
     -moz-user-select: none;     
     -ms-user-select: none;      
     user-select: none;
+    white-space: nowrap;
 `
