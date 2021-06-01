@@ -90,9 +90,14 @@ function RecentGames(props: Props) {
                 </RecentGamesHeader>
             </div>
             <Items>
-                {saveGames.map((savedGame) => (
-                    <RecentGame numbers={savedGame.numbers} date={'30/05/2002'} price={savedGame.price} game={savedGame.type} color={savedGame.color}></RecentGame>
-                ))}
+                {saveGames.map((savedGame) => {
+                    if (game === -1) 
+                        return (<RecentGame numbers={savedGame.numbers} date={'30/05/2002'} price={savedGame.price} game={savedGame.type} color={savedGame.color}></RecentGame>)
+                    else if (DUMMY_GAMES[game].type === savedGame.type)
+                        return (<RecentGame numbers={savedGame.numbers} date={'30/05/2002'} price={savedGame.price} game={savedGame.type} color={savedGame.color}></RecentGame>)
+                    else
+                        return 
+                })}
             </Items>
         </Container>
         </Fragment>
