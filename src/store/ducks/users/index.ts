@@ -1,20 +1,19 @@
-import { error } from 'console';
 import { Reducer } from 'redux';
-import { saveGamesState, saveGamesTypes } from './types'
+import { usersState, usersTypes } from './types'
 
-const INITIAL_STATE: saveGamesState = {
+const INITIAL_STATE: usersState = {
     data: [],
     error: false,
     loading: false,
 }
 
-const reducer: Reducer<saveGamesState> = (state = INITIAL_STATE, action) => {
+const reducer: Reducer<usersState> = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case saveGamesTypes.LOAD_REQUEST:
+        case usersTypes.LOAD_REQUEST:
             return { ...state, loading: true}
-        case saveGamesTypes.LOAD_SUCCESS:
+        case usersTypes.LOAD_SUCCESS:
             return { ...state, loading: false, error: false, data: action.payload }
-        case saveGamesTypes.LOAD_FAILURE:
+        case usersTypes.LOAD_FAILURE:
             return { ...state, loading: false, error:true, data: []}
         default:
             return state;

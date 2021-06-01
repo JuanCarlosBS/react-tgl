@@ -25,7 +25,7 @@ export const FormAuthentication = styles.div`
     align-items: center;
     flex-direction: column;
 `
-export const Form = styles.form`
+export const Form = styles.div`
     height : 337px;
     width: 352px;
     display: flex;
@@ -67,7 +67,7 @@ export const SectionForgotPassword = styles.div`
     justify-content:flex-end; 
 `
 
-export const SubmitButton = styles(Link)`
+export const SubmitButton = styles.button`
     font-weight: 800;
     color: #B5C401;
     text-decoration: none;
