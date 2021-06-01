@@ -1,12 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import Header from '../../components/Header'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux';
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
 import NumberButton from '../../components/NumberButton'
 import ItemCart from '../../components/ItemCart'
-import { ApplicationState } from '../../store/index'
+import * as saveGamesActions from '../../store/ducks/saveGames/actions';
+import { ApplicationState } from '../../store';
+import { saveGame } from '../../store/ducks/saveGames/types';
 
 const DUMMY_GAMES = [
     {
@@ -38,19 +41,15 @@ const DUMMY_GAMES = [
     }
 ]
 
-interface StateProps{
-
+interface StateProps {
+    saveGames: saveGame[]
 }
 
 interface DispatchProps {
-
+    loadRequest(): void
 }
 
-interface OwnProps {
-
-}
-
-type Props = StateProps & DispatchProps & OwnProps
+type Props = StateProps & DispatchProps
 
 interface ICart {
     id: string;
@@ -61,13 +60,14 @@ interface ICart {
     enabled: boolean;
 }
 
-const NewBet = () => {
+const NewBet = (props: Props) => {
     const [game, setGame] = useState<number>(-1)
     const [arrayGamesRange, setArrayGamesRange] = useState<number[]>([])
     const [numbers, setNumbers] = useState<number[]>([])
     const [cart, setCart] = useState<ICart[]>([])
     const [total, setTotal] = useState<number>(0)
-    const dispatch = useDispatch()
+    const { loadRequest } = props
+    const { saveGames } = props
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -125,7 +125,9 @@ const NewBet = () => {
 
     function saveCart(products: ICart[]) {
         if(total >= 30) {
-            
+            cart.map(item => {
+                saveGames.push(item)
+            })
             setNumbers([])
             clearGame()
             setCart([])
@@ -203,5 +205,10 @@ const NewBet = () => {
     )
 }
 
+const mapStateToProps = (state: ApplicationState) => ({
+    saveGames: state.saveGames.data,
+  });
+  
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(saveGamesActions, dispatch);
 
-export default connect()(NewBet)
+export default connect(mapStateToProps, mapDispatchToProps)(NewBet)
