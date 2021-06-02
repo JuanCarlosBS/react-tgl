@@ -33,7 +33,7 @@ const LogIn = (props: Props) => {
         const password = passwordRef.current!.value
         const userExists = users.map(user =>{
             if (user.email == email  && user.password == password) {
-                history.push('/recent-games')
+                history.push(`/recent-games/${user.id}`)
             }
         })
     }

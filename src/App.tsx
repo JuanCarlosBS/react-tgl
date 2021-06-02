@@ -23,10 +23,10 @@ function App() {
           <Route path="/register">
             <Register/>
           </Route>
-          <Route path="/recent-games">
+          <Route path="/recent-games/:userId">
             <RecentGames/>
           </Route>
-          <Route path="/new-bet">
+          <Route path="/new-bet/:userId">
             <NewBet/>
           </Route>
         </Switch>

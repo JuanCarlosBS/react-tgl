@@ -2,20 +2,28 @@ import styles from 'styled-components'
 
 export const Container = styles.div`
     margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 130px;
-    margin-right: 130px;
+    display: flex;
+    justify-content: center;
 `
 
 export const Content = styles.div`
     display: flex;
     justify-content: space-between;
-    margin-top: 41px;
+    margin-top: 20px;
+    max-width: 1080px;
+    @media (max-width: 800px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `
 
 export const Game = styles.div`
     margin-top:32px;
-    margin-right: 41px;
+    margin-right: 100px;
+    max-width: 735px;
+    @media (max-width: 800px) {
+        margin-right: 0px;
+    }
 `
 
 export const TitlePage = styles.h3`
@@ -48,6 +56,7 @@ export const Filters = styles.div`
     justify-content:flex-start;
     align-items: center;
     margin-top: 20px;
+    overflow-x: auto;
 ` 
 
 
@@ -92,6 +101,8 @@ export const GamesButton = styles.button`
     padding-right:24px;
     cursor: pointer;
     margin-right: 25px;
+    margin-bottom: 25px;
+    white-space: nowrap;
 `
 
 export const SubmitButton = styles.button`
@@ -106,6 +117,8 @@ export const SubmitButton = styles.button`
     padding-right:24px;
     background-color: #27C383;
     cursor: pointer;
+    white-space: nowrap;
+    margin-bottom: 24px;
 `
 
 export const Cart = styles.div`

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux';
+import { useParams } from 'react-router-dom'
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
@@ -11,36 +12,19 @@ import * as saveGamesActions from '../../store/ducks/saveGames/actions';
 import { ApplicationState } from '../../store';
 import { saveGame } from '../../store/ducks/saveGames/types';
 
-const DUMMY_GAMES = [
-    {
-      "type": "Lotofácil",
-      "description": "Escolha 15 números para apostar na lotofácil. Você ganha acertando 11, 12, 13, 14 ou 15 números. São muitas chances de ganhar, e agora você joga de onde estiver!",
-      "range": 25,
-      "price": 2.5,
-      "max-number": 15,
-      "color": "#7F3992",
-      "min-cart-value": 30
-    },
-    {
-      "type": "Mega-Sena",
-      "description": "Escolha 6 números dos 60 disponíveis na mega-sena. Ganhe com 6, 5 ou 4 acertos. São realizados dois sorteios semanais para você apostar e torcer para ficar milionário.",
-      "range": 60,
-      "price": 4.5,
-      "max-number": 6,
-      "color": "#01AC66",
-      "min-cart-value": 30
-    },
-    {
-      "type": "Quina",
-      "description": "Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
-      "range": 80,
-      "price": 2,
-      "max-number": 5,
-      "color": "#F79C31",
-      "min-cart-value": 30
-    }
-]
+const DUMMY_GAME = require('../../json/games.json')
 
+const DUMMY_GAMES = DUMMY_GAME.types
+
+interface GameType {
+    color: string
+    description: string
+    'max-number': number
+    'min-cart-value': number
+    'price': number
+    'range': number
+    type: string
+}
 interface StateProps {
     saveGames: saveGame[]
 }
@@ -57,7 +41,11 @@ interface ICart {
     price: number;
     color: string;
     numbers: number[];
-    enabled: boolean;
+    iduser: string;
+}
+
+interface ParamTypes {
+    userId: string
 }
 
 const NewBet = (props: Props) => {
@@ -66,8 +54,11 @@ const NewBet = (props: Props) => {
     const [numbers, setNumbers] = useState<number[]>([])
     const [cart, setCart] = useState<ICart[]>([])
     const [total, setTotal] = useState<number>(0)
+    const params = useParams<ParamTypes>()
     const { loadRequest } = props
     const { saveGames } = props
+
+    loadRequest()
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -116,14 +107,14 @@ const NewBet = (props: Props) => {
                 setTotal(total + DUMMY_GAMES[game].price)
                 return [
                     ...prevCart, 
-                    { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, enabled: true}
+                    { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, iduser: params.userId}
                 ]
             })
             clearGame()
         }
     }
 
-    function saveCart(products: ICart[]) {
+    function saveCart() {
         if(total >= 30) {
             cart.map(item => {
                 saveGames.push(item)
@@ -142,7 +133,7 @@ const NewBet = (props: Props) => {
 
     return(
         <Fragment>
-            <Header />
+            <Header idUser={params.userId}/>
             <Container>
                 <Content>
                     <Game>
@@ -152,7 +143,7 @@ const NewBet = (props: Props) => {
                         </TitlePage>
                         <TitleGame>Choose a game</TitleGame>
                         <Filters>
-                            {DUMMY_GAMES.map((product, index) =>{ 
+                            {DUMMY_GAMES.map((product: GameType, index: number) =>{ 
                                 if (index === game) {
                                     return <CheckFilter selectFilter={handleGame} value={index} firstColor={product.color} secondColor={'#fff'}>{product.type}</CheckFilter>
                                 } else {
@@ -197,7 +188,7 @@ const NewBet = (props: Props) => {
                             <TitlePage><b>CART</b> TOTAL: {total.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</TitlePage>
                             </div>
                         </GameCart>
-                        <ButtonSave onClick={() => {saveCart(cart)}}>Save ❯</ButtonSave>
+                        <ButtonSave onClick={saveCart}>Save ❯</ButtonSave>
                     </Cart>
                 </Content>
             </Container>

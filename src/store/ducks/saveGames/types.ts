@@ -10,7 +10,7 @@ export interface saveGame {
     price: number;
     color: string;
     numbers: number[];
-    enabled: boolean;
+    iduser: string;
 }
 
 export interface saveGamesState {

@@ -2,10 +2,26 @@ import styles from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styles.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 130px;
     margin-right: 130px;
+`
+
+export const Content = styles.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    max-width: 1080px;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 800px) {
+        
+        
+    }
 `
 
 export const RecentGamesHeader = styles.div`
@@ -14,18 +30,27 @@ export const RecentGamesHeader = styles.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 800px) {
+        flex-direction: column;   
+    }
 `
 
 export const RecentGamesFilter = styles.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    @media (max-width: 800px) {
+        flex-direction: column;   
+
+    }
 `
 
 export const Filters = styles.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    overflow-x: auto;
+    flex-direction: row;
 `
 
 export const TitlePage = styles.h3`
@@ -33,11 +58,19 @@ export const TitlePage = styles.h3`
     font-size: 17px;
     margin-right: 45px;
     color: var(--text-color);
+    white-space: nowrap;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    @media (max-width: 800px) {
+        margin-right: 0px;   
+
+    }
 `
 
 export const TitlePageBold = styles(TitlePage)`
     font-weight: 700;
     font-size: 24px;
+    margin-bottom: 0px;
 `
 
 export const CheckBox = styles.div`
@@ -65,17 +98,20 @@ export const LabelFilter = styles.label`
 `
 
 export const NewBetLink = styles(Link)`
+    margin-top: 15px;
     font-size: 24px;
     font-weight:  900;
     color: var(--main-color);
     text-decoration: none;
+    white-space: nowrap;
 `
 
 export const Items = styles.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 100%;
     margin-top: 37px;
-    margin-bottom: 37px;
-    min-height: 207px;
-    height:755px;
-    max-height: 800px;
+    max-height: 600px;
     overflow-y: auto;
 `
