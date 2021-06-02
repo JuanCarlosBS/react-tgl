@@ -60,7 +60,6 @@ function RecentGames(props: Props) {
             <Header idUser={params.userId}/>
         <Container>
             <Content>
-                <div className="content">
                     <RecentGamesHeader>
                         <RecentGamesFilter>
                             <TitlePageBold>RECENT GAMES</TitlePageBold>
@@ -78,7 +77,6 @@ function RecentGames(props: Props) {
                         </RecentGamesFilter>
                         <NewBetLink to={'/new-bet/' + params.userId}> New Bet ❯</NewBetLink>
                     </RecentGamesHeader>
-                </div>
                 <Items>
                     {saveGames.map((savedGame) => {
                         if (game === -1 && params.userId === savedGame.iduser) 

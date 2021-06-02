@@ -122,7 +122,10 @@ const NewBet = (props: Props) => {
             setNumbers([])
             clearGame()
             setCart([])
+        } else {
+            alert('Dever ter no minimo R$30,00')
         }
+        
     }
 
     function removeItemCart(id: string) {

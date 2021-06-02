@@ -5,8 +5,6 @@ export const Container = styles.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 130px;
-    margin-right: 130px;
 `
 
 export const Content = styles.div`
@@ -17,10 +15,6 @@ export const Content = styles.div`
     max-width: 1080px;
     flex-direction: column;
     align-items: center;
-    @media (max-width: 800px) {
-        
-        
-    }
 `
 
 export const RecentGamesHeader = styles.div`

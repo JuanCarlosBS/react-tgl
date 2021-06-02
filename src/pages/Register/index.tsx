@@ -34,12 +34,12 @@ const Register = (props: Props) => {
         const email = emailRef.current!.value
         const password = passwordRef.current!.value
         const userExists = users.map(user =>{
-            if (user.email === email  && user.password === password) {
+            if (user.email === email) {
                 alert('User already exists')
                 return true
             }
         })
-        if(!userExists) {
+        if(userExists.length === 0) {
             users.push({
                 id: Math.random().toString(),
                 name,
