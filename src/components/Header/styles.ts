@@ -1,15 +1,22 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-export const Container = styled.header`
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
+export const Content = styled.header`
     min-width: 425px;
     margin-top: 15px;
-    margin-left: 130px;
-    margin-right: 130px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 90%;
+    max-width: 1080px;
 `
 
 export const Logo = styled.h1`
@@ -47,13 +54,14 @@ export const LinkMenuFirst = styled(LinkMenu)`
 
 export const Divider = styled.hr` 
     display: flex;
+    margin-top: -4px;
     justify-content: center;
     width: 100%;
     border: 1px solid #EBEBEB;
 `
 
 export const Subline = styled.hr`
-    margin-left: 130px;
+    max-width: 930px;
     margin-top: -4px;
     width: 95px;
     border: 3px solid #b5c401;

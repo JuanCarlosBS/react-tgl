@@ -10,6 +10,7 @@ export const Content = styles.div`
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    width: 1080px;
     max-width: 1080px;
     @media (max-width: 800px) {
         flex-direction: column;
@@ -22,7 +23,12 @@ export const Game = styles.div`
     margin-right: 100px;
     max-width: 735px;
     @media (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin-right: 0px;
+        max-width: 500px;
     }
 `
 
@@ -62,7 +68,7 @@ export const Filters = styles.div`
 
 export const Numbers = styles.div`
     margin-top: 25px;
-    max-width: 735px;
+    max-width: 100%;
     max-height: 375px;
     overflow-y:auto;        
 `

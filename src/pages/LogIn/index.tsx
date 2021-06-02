@@ -34,8 +34,12 @@ const LogIn = (props: Props) => {
         const userExists = users.map(user =>{
             if (user.email == email  && user.password == password) {
                 history.push(`/recent-games/${user.id}`)
+                return true
             }
-        })
+        }
+        )
+        if(!userExists) 
+            alert('Falha no login')
     }
 
     return (

@@ -11,6 +11,9 @@ export const Container = styles.div`
     align-items: center;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    @media (max-width:800px) {
+        flex-direction: column;
+    }
 `
 
 

@@ -5,8 +5,6 @@ export const Container = styles.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
     margin-left: 130px;
     margin-right: 130px;
 `
@@ -15,6 +13,7 @@ export const Content = styles.div`
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    width: 1080px;
     max-width: 1080px;
     flex-direction: column;
     align-items: center;
@@ -28,6 +27,7 @@ export const RecentGamesHeader = styles.div`
     margin-top: 65px;
     display: flex;
     flex-direction: row;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     @media (max-width: 800px) {
@@ -59,18 +59,15 @@ export const TitlePage = styles.h3`
     margin-right: 45px;
     color: var(--text-color);
     white-space: nowrap;
-    margin-top: 15px;
-    margin-bottom: 15px;
     @media (max-width: 800px) {
         margin-right: 0px;   
-
+        margin-bottom: 15px;
     }
 `
 
 export const TitlePageBold = styles(TitlePage)`
     font-weight: 700;
     font-size: 24px;
-    margin-bottom: 0px;
 `
 
 export const CheckBox = styles.div`
@@ -98,12 +95,14 @@ export const LabelFilter = styles.label`
 `
 
 export const NewBetLink = styles(Link)`
-    margin-top: 15px;
     font-size: 24px;
     font-weight:  900;
     color: var(--main-color);
     text-decoration: none;
     white-space: nowrap;
+    @media (max-width: 800px) {
+        margin-top: 15px;
+    }
 `
 
 export const Items = styles.div`

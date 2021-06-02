@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Header from '../../components/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux';

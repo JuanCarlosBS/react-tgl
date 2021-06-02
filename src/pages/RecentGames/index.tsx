@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { useParams } from 'react-router-dom'
 
-import { Container, Content, RecentGamesHeader, RecentGamesFilter, TitlePage, TitlePageBold, Filters, LabelFilter,  NewBetLink, Items } from './styles'
+import { Container, Content, RecentGamesHeader, RecentGamesFilter, TitlePage, TitlePageBold, Filters, NewBetLink, Items } from './styles'
 import RecentGame from '../../components/RecentGame'
 import CheckFilter from '../../components/CheckFilter'
 import * as saveGamesActions from '../../store/ducks/saveGames/actions';
