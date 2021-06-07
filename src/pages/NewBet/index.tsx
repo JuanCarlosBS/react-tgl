@@ -113,8 +113,9 @@ const NewBet = (props: Props) => {
                     { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, iduser: params.userId}
                 ]
             })
-            clearGame()
+            return clearGame()
         }
+        alert(`Você precisa adicionar no minimo ${DUMMY_GAMES[game]['max-number']} numeros`)
     }
 
     function saveCart() {
@@ -125,6 +126,7 @@ const NewBet = (props: Props) => {
             setNumbers([])
             clearGame()
             setCart([])
+            alert('Itens foram salvos')
         } else {
             alert('Dever ter no minimo R$30,00')
         }
@@ -186,12 +188,12 @@ const NewBet = (props: Props) => {
                         <GameCart>
                             <TitlePage>CART</TitlePage>
                             <Items>
-                                {cart.map(item => {
+                                { cart.length > 0 ?cart.map(item => {
                                     return <ItemCart id={item.id} color={item.color} cartNumbers={item.numbers} cartGame={item.type} cartPrice={item.price} remove={removeItemCart}></ItemCart>
-                                })}
+                                }): <h6>Nenhum item no Carrinho</h6>}
                             </Items>
                             <div>
-                            <TitlePage><b>CART</b> TOTAL: {total.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</TitlePage>
+                            <TitlePage><b style={{marginRight: 5}}>CART</b> TOTAL: {total.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</TitlePage>
                             </div>
                         </GameCart>
                         <ButtonSave onClick={saveCart}>Save ❯</ButtonSave>

@@ -78,14 +78,14 @@ function RecentGames(props: Props) {
                         <NewBetLink to={'/new-bet/' + params.userId}> New Bet ❯</NewBetLink>
                     </RecentGamesHeader>
                 <Items>
-                    {saveGames.map((savedGame) => {
+                    {saveGames.length > 0?saveGames.map((savedGame) => {
                         if (game === -1 && params.userId === savedGame.iduser) 
                             return (<RecentGame numbers={savedGame.numbers} date={'30/05/2002'} price={savedGame.price} game={savedGame.type} color={savedGame.color}></RecentGame>)
                         else if (DUMMY_GAMES[game].type === savedGame.type && params.userId === savedGame.iduser)
                             return (<RecentGame numbers={savedGame.numbers} date={'30/05/2002'} price={savedGame.price} game={savedGame.type} color={savedGame.color}></RecentGame>)
                         else
                             return 
-                    })}
+                    }): <h6> Nenhum jogo recente </h6>}
                 </Items>
             </Content>
         </Container>

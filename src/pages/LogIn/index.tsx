@@ -2,6 +2,10 @@ import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { useHistory } from 'react-router-dom'
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css'
+import { store } from 'react-notifications-component';
 
 import Logo from '../../components/Logo'
 import { Container, TitleText, FormAuthentication, Form, Input, LinkForgotPassword, SectionForgotPassword, SubmitButton, LinkSingUpButton, LastInput } from './styles'
@@ -38,9 +42,21 @@ const LogIn = (props: Props) => {
             }
         }
         )
-        console.log(userExists)
         if(userExists[0] === undefined) {
-            alert('Falha no login')
+            store.addNotification({
+                title: 'Error',
+                message: 'Falha no LogIn',
+                type: 'danger',
+                container: 'top-center',
+                insert: "top",
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 1000
+                },
+            })
+
+            alert('falha no log in')
         }
     }
 

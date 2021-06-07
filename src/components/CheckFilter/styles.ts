@@ -16,4 +16,5 @@ export const CheckBox = styles.div`
     -ms-user-select: none;      
     user-select: none;
     white-space: nowrap;
+    cursor: pointer;
 `
