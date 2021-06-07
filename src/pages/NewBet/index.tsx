@@ -74,25 +74,28 @@ const NewBet = (props: Props) => {
         setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
     function activeNumberHandle(props: number) {
+        console.log({props})
         if (numbers.indexOf(props) === -1) {
             if (numbers.length >= DUMMY_GAMES[game]['max-number']){
                 return
             }
-        setNumbers((prevNumbers) => {
-            return [
-                ...prevNumbers, 
-                props
-            ]
-        })} else {
+        setNumbers([...numbers, props])
+        //setNumbers((prevNumbers) => {
+          //  return [
+            //    ...prevNumbers, 
+            //    props
+            //]
+        /*})*/
+        } else {
             setNumbers(numbers.filter(item => item !== props))
         }
     }
-
     function completeGame() {
+
         while (numbers.length < DUMMY_GAMES[game]['max-number']) {
             const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range) + 1
-            console.log(numbersGame)
-            console.log(numbers.length)
+            //console.log(numbersGame)
+            //console.log(numbers.length)
             activeNumberHandle(numbersGame)
         }
     }
