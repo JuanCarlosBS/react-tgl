@@ -73,31 +73,45 @@ const NewBet = (props: Props) => {
         setArrayGamesRange([])
         setArrayGamesRange(Array.from({length: Number(DUMMY_GAMES[props].range)}, (_,i) => i+1))
     }
-    function activeNumberHandle(props: number) {
-        console.log({props})
-        if (numbers.indexOf(props) === -1) {
+    function activeNumberHandle(props: number[]) {
+        if (numbers.indexOf(props[0]) === -1) {
             if (numbers.length >= DUMMY_GAMES[game]['max-number']){
                 return
             }
-        setNumbers([...numbers, props])
-        //setNumbers((prevNumbers) => {
-          //  return [
-            //    ...prevNumbers, 
-            //    props
-            //]
-        /*})*/
+            setNumbers([...props, ...numbers])
         } else {
-            setNumbers(numbers.filter(item => item !== props))
+            setNumbers(numbers.filter(item => item !== props[0]))
         }
+        
+
+        /*console.log({props})
+        props.map(number => {
+            if (numbers.indexOf(number) === -1) {
+                if (numbers.length >= DUMMY_GAMES[game]['max-number']){
+                    return
+                }
+            setNumbers([...numbers, number])
+            //setNumbers((prevNumbers) => {
+              //  return [
+                //    ...prevNumbers, 
+                //    number
+                //]
+            /*})
+            } else {
+                setNumbers(numbers.filter(item => item !== number))
+            }
+        })*/
+
     }
     function completeGame() {
-
-        while (numbers.length < DUMMY_GAMES[game]['max-number']) {
+        const completeGameNumbers: number[] = []
+        for (let i = numbers.length; i < DUMMY_GAMES[game]['max-number']; i++) {
             const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range) + 1
             //console.log(numbersGame)
             //console.log(numbers.length)
-            activeNumberHandle(numbersGame)
+            completeGameNumbers.push(numbersGame)
         }
+        activeNumberHandle(completeGameNumbers)
     }
 
     function clearGame() {

@@ -6,9 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store/index';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 ReactDOM.render(
+
   <Provider store={store}>
+    <ReactNotification />
       <BrowserRouter>
   <React.StrictMode>
     <App />

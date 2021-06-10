@@ -55,8 +55,6 @@ const LogIn = (props: Props) => {
                     duration: 1000
                 },
             })
-
-            alert('falha no log in')
         }
     }
 
