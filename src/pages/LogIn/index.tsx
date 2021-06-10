@@ -52,7 +52,7 @@ const LogIn = (props: Props) => {
                 animationIn: ['animated', 'fadeIn'],
                 animationOut: ['animated', 'fadeOut'],
                 dismiss: {
-                    duration: 1000
+                    duration: 2000
                 },
             })
         }

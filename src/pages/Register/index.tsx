@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import 'animate.css'
+import { store } from 'react-notifications-component';
 
 import Logo from '../../components/Logo'
 import { Container, TitleText, FormAuthentication, Form, Input, SubmitButton, LinkSingUpButton, LastInput } from './styles'
@@ -35,7 +37,18 @@ const Register = (props: Props) => {
         const password = passwordRef.current!.value
         const userExists = users.map(user =>{
             if (user.email === email) {
-                alert('User already exists')
+                store.addNotification({
+                    title: 'Error',
+                    message: 'Usuario já existe.',
+                    type: 'danger',
+                    container: 'top-center',
+                    insert: "top",
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+                    dismiss: {
+                        duration: 2000
+                    },
+                })
                 return true
             }
         })

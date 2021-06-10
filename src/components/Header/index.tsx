@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Container,Content, Menu, Logo, Divider, Subline, TextMenuFirst, LinkMenu } from './styles'
+import { Container,Content, Menu, Logo, Divider, Subline, TextMenuFirst, LinkMenu, LinkMenuFirst } from './styles'
 
 const Header : React.FC<{idUser: string}> = (props) => {
     return (
@@ -14,7 +14,7 @@ const Header : React.FC<{idUser: string}> = (props) => {
                     <LinkMenu to={'/recent-games/' + props.idUser} >Home</LinkMenu>
                 </Menu>
                 <Menu>
-                    <TextMenuFirst>Account</ TextMenuFirst>
+                    <LinkMenuFirst to={'/recent-games/' + props.idUser}>Account</ LinkMenuFirst>
                     <LinkMenu to='/'>Sair</LinkMenu>
                 </Menu>
             </Content>

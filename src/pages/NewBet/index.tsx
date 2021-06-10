@@ -3,6 +3,8 @@ import Header from '../../components/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux';
 import { useParams } from 'react-router-dom'
+import 'animate.css'
+import { store } from 'react-notifications-component';
 
 import { Container, Content, Game, TitlePage, TitlePageBold, TitleGame, Filters, DescriptionGame, Numbers, Submit, GamesButton, SubmitButton, Cart, GameCart, Items, ButtonSave } from './styles'
 import CheckFilter from '../../components/CheckFilter'
@@ -76,6 +78,18 @@ const NewBet = (props: Props) => {
     function activeNumberHandle(props: number[]) {
         if (numbers.indexOf(props[0]) === -1) {
             if (numbers.length >= DUMMY_GAMES[game]['max-number']){
+                store.addNotification({
+                    title: 'Warning',
+                    message: `Você pode adicionar no maximo ${DUMMY_GAMES[game]['max-number']} numeros`,
+                    type: 'warning',
+                    container: 'top-center',
+                    insert: "top",
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+                    dismiss: {
+                        duration: 2000
+                    },
+                })
                 return
             }
             setNumbers([...props, ...numbers])
@@ -127,9 +141,22 @@ const NewBet = (props: Props) => {
                     { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, iduser: params.userId}
                 ]
             })
+            setGame(-1)
+            setArrayGamesRange([])
             return clearGame()
         }
-        alert(`Você precisa adicionar no minimo ${DUMMY_GAMES[game]['max-number']} numeros`)
+        store.addNotification({
+            title: 'Warning',
+            message: `Você precisa adicionar no minimo ${DUMMY_GAMES[game]['max-number']} numeros`,
+            type: 'warning',
+            container: 'top-center',
+            insert: "top",
+            animationIn: ['animated', 'fadeIn'],
+            animationOut: ['animated', 'fadeOut'],
+            dismiss: {
+                duration: 2000
+            },
+        })
     }
 
     function saveCart() {
@@ -140,9 +167,31 @@ const NewBet = (props: Props) => {
             setNumbers([])
             clearGame()
             setCart([])
-            alert('Itens foram salvos')
+            store.addNotification({
+                title: 'Success',
+                message: `Os jogos foram salvos`,
+                type: 'success',
+                container: 'top-center',
+                insert: "top",
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 2000
+                },
+            })
         } else {
-            alert('Dever ter no minimo R$30,00')
+            store.addNotification({
+                title: 'Warning',
+                message: `Você precisa adicionar no minimo R$ 30,00 ao carrinho`,
+                type: 'warning',
+                container: 'top-center',
+                insert: "top",
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 2000
+                },
+            })
         }
         
     }
