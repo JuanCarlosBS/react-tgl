@@ -6,6 +6,7 @@ import RecentGames from './pages/RecentGames';
 import LogIn from './pages/LogIn';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword'
+import AccountPage from './pages/AccountPage'
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/new-bet/:userId">
             <NewBet/>
+          </Route>
+          <Route path="/user/:userId">
+            <AccountPage />
           </Route>
         </Switch>
       </Fragment>

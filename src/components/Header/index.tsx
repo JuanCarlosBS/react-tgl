@@ -14,7 +14,7 @@ const Header : React.FC<{idUser: string}> = (props) => {
                     <LinkMenu to={'/recent-games/' + props.idUser} >Home</LinkMenu>
                 </Menu>
                 <Menu>
-                    <LinkMenuFirst to={'/recent-games/' + props.idUser}>Account</ LinkMenuFirst>
+                    <LinkMenuFirst to={'/user/' + props.idUser}>Account</ LinkMenuFirst>
                     <LinkMenu to='/'>Sair</LinkMenu>
                 </Menu>
             </Content>
