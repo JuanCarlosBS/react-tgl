@@ -6,6 +6,7 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import 'animate.css'
 import { store } from 'react-notifications-component';
+import api from '../../services/api'
 
 import Logo from '../../components/Logo'
 import { Container, TitleText, FormAuthentication, Form, Input, LinkForgotPassword, SectionForgotPassword, SubmitButton, LinkSingUpButton, LastInput } from './styles'
@@ -32,20 +33,25 @@ const LogIn = (props: Props) => {
 
     loadRequest()
 
-    function handleLogin() {
-        const email = emailRef.current!.value
-        const password = passwordRef.current!.value
-        const userExists = users.map(user =>{
-            if (user.email == email  && user.password == password) {
-                history.push(`/recent-games/${user.id}`)
-                return user
+    async function handleLogin(e: React.FormEvent) {
+        e.preventDefault()  
+
+        try {
+            const data = {
+                email: emailRef.current!.value,
+                password: passwordRef.current!.value,
             }
-        }
-        )
-        if(userExists[0] === undefined) {
+            
+            const res = await api.post('sessions', data);
+            
+            const { token } = res.data
+            console.log(token)
+            localStorage.setItem('userId', token)
+            history.push('/recent-games/'+ token)
+        } catch (err) {
             store.addNotification({
                 title: 'Error',
-                message: 'Falha no LogIn',
+                message: 'Usuario já existe, ou invalido.',
                 type: 'danger',
                 container: 'top-center',
                 insert: "top",
@@ -63,13 +69,13 @@ const LogIn = (props: Props) => {
             <Logo />
             <FormAuthentication>
                 <TitleText>Authentication</TitleText>
-                <Form>
+                <Form onSubmit={handleLogin}>
                     <Input type="email" placeholder="Email" ref={emailRef}/>
                     <LastInput type="password" placeholder="Password" ref={passwordRef}/>
                     <SectionForgotPassword>
                         <LinkForgotPassword to='/forgot-password'>I forgot my password</LinkForgotPassword>
                     </SectionForgotPassword>
-                    <SubmitButton onClick={handleLogin}>Log In</SubmitButton>
+                    <SubmitButton >Log In</SubmitButton>
                 </Form>
                 <LinkSingUpButton to='/register'>Sign Up</LinkSingUpButton>
             </FormAuthentication>

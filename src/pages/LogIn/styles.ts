@@ -28,7 +28,7 @@ export const FormAuthentication = styles.div`
     align-items: center;
     flex-direction: column;
 `
-export const Form = styles.div`
+export const Form = styles.form`
     height : 337px;
     width: 352px;
     display: flex;
