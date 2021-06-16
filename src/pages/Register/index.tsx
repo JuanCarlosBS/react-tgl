@@ -10,6 +10,7 @@ import { Container, TitleText, FormAuthentication, Form, Input, SubmitButton, Li
 import * as usersActions from '../../store/ducks/users/actions';
 import { ApplicationState } from '../../store';
 import { user } from '../../store/ducks/users/types';
+import api from '../../services/api'
 
 interface StateProps {
     users: user[]
@@ -31,11 +32,20 @@ const Register = (props: Props) => {
 
     loadRequest()
 
-    function handleRegister() {
+    async function handleRegister(event: React.FormEvent) {
+        event.preventDefault()
         const name = nameRef.current!.value
         const email = emailRef.current!.value
         const password = passwordRef.current!.value
+
+        const data = {
+            username: name,
+            email,
+            password,
+            "password_confirmation": password
+        }
         const userExists = users.map(user =>{
+
             if (user.email === email) {
                 store.addNotification({
                     title: 'Error',
@@ -52,13 +62,10 @@ const Register = (props: Props) => {
                 return true
             }
         })
+
+        
         if(userExists.length === 0) {
-            users.push({
-                id: Math.random().toString(),
-                name,
-                email,
-                password
-            })
+            const res = await api.post('users', data);
             history.push('/')
         }
     }
@@ -68,11 +75,11 @@ const Register = (props: Props) => {
             <Logo />
             <FormAuthentication>
                 <TitleText>Registration</TitleText>
-                <Form>
+                <Form onSubmit={handleRegister}>
                     <Input placeholder="Name" ref={nameRef}/>
                     <LastInput type='email' placeholder="Email" ref={emailRef}/>
                     <LastInput type='password' placeholder="Password" ref={passwordRef}/>
-                    <SubmitButton onClick={handleRegister}>Register</SubmitButton>
+                    <SubmitButton type="submit">Register</SubmitButton>
                 </Form>
                 <LinkSingUpButton to="/">Back</LinkSingUpButton>
             </FormAuthentication>
