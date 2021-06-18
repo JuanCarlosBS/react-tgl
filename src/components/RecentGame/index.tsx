@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Item, Bar, Numbers, GameNamePrice, GameNamePriceTextOffBold, GameNamePriceText } from './styles'
 
-const RecentGame: React.FC<{ numbers: number[], date: string, price: number, game: string, color: string}> = (props) => {
+const RecentGame: React.FC<{ numbers: string, date: string, price: number, game: string, color: string}> = (props) => {
     return (
         <Item>
             <Bar style={{ backgroundColor: props.color }}/>
             <div>
-                <Numbers>{props.numbers.join(', ')}</Numbers>
+                <Numbers>{props.numbers}</Numbers>
                 <GameNamePrice>
                     <GameNamePriceTextOffBold>{props.date}</GameNamePriceTextOffBold>
                     <GameNamePriceTextOffBold> - </GameNamePriceTextOffBold>
