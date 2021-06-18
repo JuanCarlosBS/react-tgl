@@ -51,7 +51,7 @@ const LogIn = (props: Props) => {
         } catch (err) {
             store.addNotification({
                 title: 'Error',
-                message: 'Usuario já existe, ou invalido.',
+                message: 'Falha no login.',
                 type: 'danger',
                 container: 'top-center',
                 insert: "top",

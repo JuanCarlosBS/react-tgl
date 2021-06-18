@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux';
@@ -13,12 +13,9 @@ import ItemCart from '../../components/ItemCart'
 import * as saveGamesActions from '../../store/ducks/saveGames/actions';
 import { ApplicationState } from '../../store';
 import { saveGame } from '../../store/ducks/saveGames/types';
-
-const DUMMY_GAME = require('../../json/games.json')
-
-const DUMMY_GAMES = DUMMY_GAME.types
-
+import api from '../../services/api'
 interface GameType {
+    id: number;
     color: string
     description: string
     'max-number': number
@@ -44,10 +41,28 @@ interface ICart {
     color: string;
     numbers: number[];
     iduser: string;
+    gameId: number;
 }
 
 interface ParamTypes {
     userId: string
+}
+
+interface GamesProps {
+    id: number;
+    type: string;
+    description: string;
+    range: number;
+    price: number;
+    max_number: number;
+    color: string;
+    min_cart_value: number;
+}
+
+interface CartItem {
+    numbers: string;
+    price: number;
+    game_id: number;
 }
 
 const NewBet = (props: Props) => {
@@ -56,11 +71,26 @@ const NewBet = (props: Props) => {
     const [numbers, setNumbers] = useState<number[]>([])
     const [cart, setCart] = useState<ICart[]>([])
     const [total, setTotal] = useState<number>(0)
+    const [DUMMY_GAMES, setDUMMY_GAMES] = useState<GamesProps[]>([])
     const params = useParams<ParamTypes>()
+    const userId = localStorage.getItem('userId')
     const { loadRequest } = props
     const { saveGames } = props
 
     loadRequest()
+    
+
+    useEffect(() => {
+        async function getGames() {
+            const res = await api.get('games')
+            setDUMMY_GAMES(res.data)
+        }
+
+        getGames()
+    })
+
+
+    
     
     function handleGame(gameValue: number) {
         selectGame(gameValue)
@@ -77,10 +107,10 @@ const NewBet = (props: Props) => {
     }
     function activeNumberHandle(props: number[]) {
         if (numbers.indexOf(props[0]) === -1) {
-            if (numbers.length >= DUMMY_GAMES[game]['max-number']){
+            if (numbers.length >= DUMMY_GAMES[game].max_number){
                 store.addNotification({
                     title: 'Warning',
-                    message: `Você pode adicionar no maximo ${DUMMY_GAMES[game]['max-number']} numeros`,
+                    message: `Você pode adicionar no maximo ${DUMMY_GAMES[game].max_number} numeros`,
                     type: 'warning',
                     container: 'top-center',
                     insert: "top",
@@ -119,7 +149,7 @@ const NewBet = (props: Props) => {
     }
     function completeGame() {
         const completeGameNumbers: number[] = []
-        for (let i = numbers.length; i < DUMMY_GAMES[game]['max-number']; i++) {
+        for (let i = numbers.length; i < DUMMY_GAMES[game].max_number; i++) {
             const numbersGame = Math.floor(Math.random() * DUMMY_GAMES[game].range) + 1
             //console.log(numbersGame)
             //console.log(numbers.length)
@@ -133,12 +163,12 @@ const NewBet = (props: Props) => {
     }
 
     function addCartHandle() {
-        if (numbers.length === DUMMY_GAMES[game]['max-number']) {
+        if (numbers.length === DUMMY_GAMES[game].max_number) {
             setCart((prevCart) => {
                 setTotal(total + DUMMY_GAMES[game].price)
                 return [
                     ...prevCart, 
-                    { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, iduser: params.userId}
+                    { id: Math.random().toString(), type: DUMMY_GAMES[game].type, price: DUMMY_GAMES[game].price, color: DUMMY_GAMES[game].color, numbers: numbers, iduser: params.userId, gameId: DUMMY_GAMES[game].id}
                 ]
             })
             setGame(-1)
@@ -147,7 +177,7 @@ const NewBet = (props: Props) => {
         }
         store.addNotification({
             title: 'Warning',
-            message: `Você precisa adicionar no minimo ${DUMMY_GAMES[game]['max-number']} numeros`,
+            message: `Você precisa adicionar no minimo ${DUMMY_GAMES[game].max_number} numeros`,
             type: 'warning',
             container: 'top-center',
             insert: "top",
@@ -159,14 +189,28 @@ const NewBet = (props: Props) => {
         })
     }
 
-    function saveCart() {
+    async function saveCart() {
         if(total >= 30) {
-            cart.map(item => {
-                saveGames.push(item)
+            const cartItem: CartItem[] = []
+            cart.map(async item => {
+                cartItem.push({
+                    numbers: item.numbers.join(','),
+                    price: item.price,
+                    game_id: item.gameId 
+                })
+            })
+            const cartToJSON = {
+                "cart": cartItem
+            }
+            const res = await api.post('bets', cartToJSON, {
+                headers: {
+                    Authorization: `Bearer ${userId}`,
+                }
             })
             setNumbers([])
             clearGame()
             setCart([])
+            setTotal(0)
             store.addNotification({
                 title: 'Success',
                 message: `Os jogos foram salvos`,
@@ -214,7 +258,7 @@ const NewBet = (props: Props) => {
                         </TitlePage>
                         <TitleGame>Choose a game</TitleGame>
                         <Filters>
-                            {DUMMY_GAMES.map((product: GameType, index: number) =>{ 
+                            {DUMMY_GAMES.map((product: GamesProps, index: number) =>{ 
                                 if (index === game) {
                                     return <CheckFilter selectFilter={handleGame} value={index} firstColor={product.color} secondColor={'#fff'}>{product.type}</CheckFilter>
                                 } else {
