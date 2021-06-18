@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import 'animate.css'
@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom'
 import * as usersActions from '../../store/ducks/users/actions';
 import { ApplicationState } from '../../store';
 import { user } from '../../store/ducks/users/types';
+import api from '../../services/api'
 
 interface StateProps {
     users: user[]
@@ -23,43 +24,79 @@ interface ParamTypes {
     userId: string
 }
 
+interface UserType {
+    username: string;
+    email: string
+}
+
 type Props = StateProps & DispatchProps
 
 const Account = (props:Props) => {
     const params = useParams<ParamTypes>()
     const { loadRequest } = props
-    const { users } = props
+    const {users} = props
+    const [user, setUser]  = useState<UserType>()
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
-    const passwordConfRef = useRef<HTMLInputElement>(null)
+    const nameRef = useRef<HTMLInputElement>(null)
+    const userIndex = localStorage.getItem('userIndex')
+    const userId = localStorage.getItem('userId')
 
     loadRequest()
 
-    function updateHandle() {
+    useEffect(() => {
+        async function getUser() {
+            const res = await api.get('users/'+ userIndex)
+            setUser(res.data)
+        }
+        getUser()
+    })
+
+    async function updateHandle(e: React.FormEvent) {
+        e.preventDefault()
         const email = emailRef.current!.value
         const password = passwordRef.current!.value
-        const passwordConf = passwordConfRef.current!.value
-        if ( password !== passwordConf ) {
-            return 
+        const name = nameRef.current!.value
+        const data = {
+            username: name,
+            email: email,
+            password: password
         }
-        users.map((user, index) => {
-            if (user.id === params.userId) {
-                users[index] = { id : params.userId, name: user.name, email: email, password: password }
-                store.addNotification({
-                    title: 'Success',
-                    message: 'O usuário foi atualizado',
-                    type: 'success',
-                    container: 'top-center',
-                    insert: "top",
-                    animationIn: ['animated', 'fadeIn'],
-                    animationOut: ['animated', 'fadeOut'],
-                    dismiss: {
-                        duration: 2000
-                    },
-                })
-            }
+
+        try {
+            const res = await api.put(`users/${userIndex}`, data, { 
+                headers: {
+                    Authorization: `Bearer ${userId}`,
+            }})
+    
+            console.log(res.data)
+    
+            store.addNotification({
+                title: 'Success',
+                message: 'O usuário foi atualizado',
+                type: 'success',
+                container: 'top-center',
+                insert: "top",
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 2000
+                },
+            })
+        } catch (err) {
+            store.addNotification({
+                title: 'Erro',
+                message: 'Tivemos um problema para atualizar',
+                type: 'danger',
+                container: 'top-center',
+                insert: "top",
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 2000
+                },
+            })
         }
-        )
     }
 
     return(
@@ -69,22 +106,15 @@ const Account = (props:Props) => {
                 <Content>
                     <Title>User</Title>
                     <SubTitle>Username</SubTitle>
-                    <P>{users.map(user =>{
-                        if (user.id === params.userId) {
-                            return user.name
-                        }
-                    })}</P>
+                    <P>{user?.username}</P>
                     <SubTitle>Email</SubTitle>
-                    <P>{users.map(user =>{
-                        if (user.id === params.userId) {
-                            return user.email
-                        }
-                    })}</P>
-                    
-                    <Input type="email" placeholder="Email" ref={emailRef}/>
-                    <Input type="password"placeholder="Password" ref={passwordRef}/>
-                    <Input type="password" placeholder="Confirm Password" ref={passwordConfRef}/>
-                    <Button onClick={updateHandle} >Atualizar dados</Button>
+                    <P>{user?.email}</P>
+                    <form onSubmit={updateHandle}>
+                    <Input type="text" placeholder="Name" ref={nameRef}/>
+                    <Input type="email"placeholder="Email" ref={emailRef}/>
+                    <Input type="password" placeholder="Confirm Password" ref={passwordRef}/>
+                    <Button type="submit" >Atualizar dados</Button>
+                    </form>
                 </Content>
             </Container>
         </React.Fragment>

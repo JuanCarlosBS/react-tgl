@@ -88,8 +88,9 @@ function RecentGames(props: Props) {
             const res = await api.get('bets', { 
                 headers: {
                     Authorization: `Bearer ${userId}`,
-            }})
-            setSaveGames(res.data)
+            }}) 
+            await setSaveGames(res.data.filteredBets)
+            localStorage.setItem('userIndex', res.data.user_id)
         }
 
         getGames()
