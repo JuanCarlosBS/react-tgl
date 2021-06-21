@@ -1,29 +1,32 @@
 import React, { useRef } from 'react';
+import { useParams, useHistory } from 'react-router-dom'
 import { store } from 'react-notifications-component';
-import { useHistory } from 'react-router-dom'
-
 
 import Logo from '../../components/Logo'
 import { Container, TitleText, FormAuthentication, Form, Input, SubmitButton, LinkSingUpButton } from './styles'
 import api from '../../services/api'
 
+interface ParamTypes {
+    token: string;
+}
 
 const Register = () => {
-    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
+    const params = useParams<ParamTypes>()
     const history = useHistory()
-    
-    async function forgotPasswordHandler(e: React.FormEvent) {
+    async function forgotPasswordHandler(e : React.FormEvent) {
         e.preventDefault()
-        const email = emailRef.current!.value
+        const password = passwordRef.current!.value
         const data = {
-            email,
-            redirect_url: 'http://localhost:3000/new-password'
+            password,
+            password_confirmation: password,
+            token: params.token
         }
         try {
-            const res = await api.post('passwords', data)
+            const res = await api.put('passwords', data)
             store.addNotification({
                 title: 'Success',
-                message: `Email foi enviado`,
+                message: 'Senha atualizada',
                 type: 'success',
                 container: 'top-center',
                 insert: "top",
@@ -37,7 +40,7 @@ const Register = () => {
         } catch (err) {
             store.addNotification({
                 title: 'Error',
-                message: `Email não existe`,
+                message: 'Token invalido.',
                 type: 'danger',
                 container: 'top-center',
                 insert: "top",
@@ -49,15 +52,16 @@ const Register = () => {
             })
         }
         
+
     }
     return (
         <Container>
             <Logo />
-            <FormAuthentication >
-                <TitleText>Reset Password</TitleText>
+            <FormAuthentication>
+                <TitleText>New Password</TitleText>
                 <Form onSubmit={forgotPasswordHandler}>
-                    <Input type="email" placeholder="Email" ref={emailRef}/>
-                    <SubmitButton type="submit" >Send link</SubmitButton>
+                    <Input type="password" placeholder="Password" ref={passwordRef}/>
+                    <SubmitButton>Send Password</SubmitButton>
                 </Form>
                 <LinkSingUpButton to="/">Back</LinkSingUpButton>
             </FormAuthentication>

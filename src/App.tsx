@@ -7,6 +7,7 @@ import LogIn from './pages/LogIn';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword'
 import AccountPage from './pages/AccountPage'
+import NewPassword from './pages/NewPassword'
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/user/:userId">
             <AccountPage />
+          </Route>
+          < Route path="/new-password/:token">
+            <NewPassword/>
           </Route>
         </Switch>
       </Fragment>
